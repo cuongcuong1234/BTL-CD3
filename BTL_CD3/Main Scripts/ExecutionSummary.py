@@ -11,7 +11,7 @@ Status: ✓ COMPLETE
 # Load summary statistics
 import pandas as pd
 
-df = pd.read_csv('data_cleaned.csv')
+df = pd.read_csv(r'D:\BTLCD3\BTL_CD3\data Files\data_cleaned.csv')
 
 print("="*80)
 print("ANALYSIS EXECUTION SUMMARY")

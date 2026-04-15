@@ -9,7 +9,7 @@ import numpy as np
 from datetime import datetime
 
 # Load data
-df = pd.read_csv('data_cleaned.csv')
+df = pd.read_csv(r'D:\BTLCD3\BTL_CD3\data Files\data_cleaned.csv')
 
 # Create report
 report = []

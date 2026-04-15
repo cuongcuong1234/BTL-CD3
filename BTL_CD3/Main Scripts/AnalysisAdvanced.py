@@ -13,7 +13,7 @@ print("ADVANCED ANALYSIS - DETAILED INSIGHTS")
 print("="*60)
 
 # Load cleaned data
-df = pd.read_csv('data_cleaned.csv')
+df = pd.read_csv(r'D:\BTLCD3\BTL_CD3\data Files\data_cleaned.csv')
 
 # ================== 1. CUSTOMER LIFETIME VALUE ANALYSIS ==================
 print("\n1. CUSTOMER LIFETIME VALUE (CLV) ANALYSIS")
