@@ -109,3 +109,18 @@ CHO BỘ PHẬN CHĂM SÓC KHÁCH HÀNG:
   ⚠️  high_churn_risk_customers.csv      → Khách hàng có nguy cơ rời bỏ
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🔧 CÁCH CHẠY LẠI PHÂN TÍCH
+
+Tất cả Script (Phân tích đầy đủ):
+  python BaiTap.py
+  python AnalysisAdvanced.py
+  python GenerateReport.py
+
+Các thành phần riêng lẻ:
+  - BaiTap.py: Làm sạch dữ liệu + phân khúc + dự đoán
+  - AnalysisAdvanced.py: Trực quan hóa nâng cao
+  - GenerateReport.py: Báo cáo toàn diện
+
+Đầu ra: Tất cả file CSV, ảnh PNG và báo cáo được tạo lại
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
