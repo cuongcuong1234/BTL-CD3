@@ -1,0 +1,415 @@
+Customer_ID,Age,Income_Level,Purchase_Amount,Customer_Satisfaction,Location
+48-980-6078,29,Middle,101.31,1,Wiwilí
+82-561-4233,45,Middle,487.95,3,Boro Utara
+37-065-3182,24,High,201.96,2,Gråbo
+44-674-4037,33,Middle,389.7,4,Punta Gorda
+23-302-7502,30,High,58.51,4,Alameda
+90-069-8934,40,High,109.29,2,Dhankutā
+00-477-9449,36,Middle,454.39,3,White Rock
+67-159-7366,29,High,490.75,4,Monastyrshchina
+85-691-4293,21,Middle,463.07,2,Pangkalanbunut
+33-264-2822,38,High,371.32,1,Lugo
+21-755-8745,37,High,136.53,3,Montpellier
+29-625-7057,31,Middle,489.05,2,Nesovice
+58-623-8404,50,High,81.91,4,Pasirhuni
+56-506-4709,50,Middle,135.8,2,Glendale
+25-839-8670,45,Middle,382.24,4,Tála
+28-225-4286,39,High,282.13,2,Paris 06
+85-738-6864,25,Middle,138.88,3,Inayauan
+19-999-0134,30,Middle,353.4,1,Hongqi
+57-989-1487,46,Middle,329.41,1,Oeoh
+07-816-2673,46,Middle,54.46,1,Topol’noye
+70-761-3550,43,High,257.12,1,Kovářov
+38-242-3251,43,High,293.04,3,Majdal Banī Fāḑil
+95-525-0842,34,High,110.4,3,Delta del Tigre
+82-990-0504,46,Middle,378.87,2,Pélla
+76-148-9413,43,High,111.24,2,Benevides
+53-639-3774,37,Middle,299.31,3,Qinghaihu
+20-817-9584,42,Middle,169.28,1,Alfeizerão
+18-655-3670,29,Middle,449.13,2,Prostřední Bečva
+72-431-5021,35,High,427.48,1,Oeiras
+39-636-5871,38,High,362.01,1,Bilice
+20-830-4758,35,Middle,286.43,3,Strezhevoy
+84-337-1016,19,High,333.32,3,Longxing
+09-346-4992,46,High,223.47,2,Jesús Menéndez
+75-083-3608,23,Middle,414.83,4,Hongguang
+12-409-5166,48,Middle,368.4,3,Camp Ithier
+07-024-4995,27,Middle,328.36,4,Holboo
+31-395-1286,47,High,197.12,1,Ostashkov
+60-838-4334,45,High,454.57,1,Hongshanzui
+71-197-8227,37,Middle,298.38,2,Tocoa
+04-465-1819,37,High,354.87,4,Karpogory
+69-692-0614,18,Middle,214.48,3,Shāhzādpur
+05-465-8765,27,High,380.99,1,Gjegjan
+74-353-6312,46,Middle,113.88,4,Pameungpeuk
+78-824-1887,26,Middle,121.57,4,Junshan
+46-503-5589,41,High,136.2,1,Sancang
+30-520-8656,19,Middle,194.93,4,San Patricio
+36-323-3504,29,Middle,377.67,1,Fengtai
+93-810-4051,26,High,108.61,3,Ḑawrān ad Daydah
+23-253-2565,23,High,461.09,4,Hinlayagan Ilaud
+74-509-4985,19,High,211.16,3,Forshaga
+05-857-1572,23,Middle,421.95,1,Rakszawa
+26-521-8328,49,Middle,378.59,4,Fengjiang
+31-147-6197,23,High,268.93,3,Jiangcun
+38-935-1865,18,High,160.82,1,Novoukrainskiy
+75-953-8663,35,High,494.18,2,Acobambilla
+38-478-2681,22,Middle,177.05,1,Kyonju
+70-895-5298,28,Middle,450.66,4,Pomar
+70-108-1493,25,Middle,365.1,3,Dobrica
+78-272-6417,49,Middle,163.14,2,Marseille
+13-792-4356,21,High,162.31,2,Tianbao
+04-563-9091,37,Middle,328.21,2,Puqian
+79-592-5396,30,High,268.59,1,Binalbagan
+67-935-7964,41,Middle,205.49,2,Nikolayevsk
+57-410-7415,33,High,254.73,3,Týn nad Vltavou
+19-643-1879,45,Middle,257.86,4,Kawangkoan
+27-806-4972,26,High,469.22,1,Obong
+48-343-1220,42,High,335.32,1,Kolsko
+58-788-8938,49,High,427.1,2,Hachiōji
+94-969-6819,33,High,77.65,3,Gustavsberg
+76-982-8107,47,Middle,85.61,3,La Mohammedia
+79-884-5600,36,High,245.14,4,Goiatuba
+87-290-8263,31,High,309.22,4,Metchosin
+99-316-9993,27,Middle,146.59,2,Staritsa
+54-164-2243,48,Middle,298.73,2,Benito Juarez
+37-513-5073,33,Middle,193.76,2,Mizque
+40-232-5631,47,Middle,227.47,4,Suvorov
+21-297-1223,49,High,124.17,4,Pancas
+10-961-9336,27,Middle,78.0,1,Dayapan
+71-473-2656,27,High,393.03,3,Gordon Town
+00-496-3067,32,Middle,249.24,3,Oslo
+76-501-6422,24,Middle,205.36,1,Houston
+62-493-5282,35,High,256.63,2,Shuigou
+18-841-7253,50,High,409.98,1,Xingxi
+83-792-5141,50,Middle,101.7,2,Chengguan
+65-036-2410,50,Middle,369.73,3,Paris 09
+33-484-6674,47,Middle,280.05,2,Porangatu
+65-249-5416,35,High,54.71,3,Shalkar
+00-733-8770,37,High,57.5,3,Narok
+47-501-3435,38,High,225.05,1,Gimcheon
+46-779-7065,41,High,441.15,1,Visaginas
+91-603-1565,48,Middle,481.21,1,Shostka
+72-728-4406,50,Middle,143.52,3,Liutan
+13-588-2488,39,Middle,276.48,4,Huanggang
+66-974-6707,48,Middle,228.68,4,Mi’ersi
+95-112-6724,31,Middle,301.39,4,Xuedian
+27-262-6874,25,Middle,473.5,3,Yuyapichis
+70-014-6406,18,Middle,171.72,2,Kobe
+52-908-9971,31,Middle,467.5,1,Gulou
+71-959-3896,29,High,98.63,3,Cipari
+29-987-3969,21,Middle,193.3,1,Orlando
+78-613-1546,49,Middle,145.02,1,Torsby
+43-664-4451,30,Middle,294.99,4,San Pablo
+34-095-3364,31,Middle,305.45,1,Daszewice
+73-139-4306,24,Middle,139.1,3,Puerto López
+23-794-8196,36,High,268.28,2,Xinchengzi
+53-013-1026,40,High,53.67,2,Duyure
+18-047-5540,50,High,98.02,3,Kuala Lumpur
+23-985-3535,26,High,382.49,3,Monrovia
+03-977-8103,25,Middle,333.56,2,Quebrada Canoa
+03-827-4021,39,High,129.82,1,Moate
+68-507-4747,41,High,278.78,1,Kubangwaru
+73-942-8440,37,Middle,112.55,1,Марино
+64-641-7874,33,High,481.84,1,Providence
+36-240-3240,25,Middle,56.85,1,Shilin
+67-209-0990,39,High,373.01,4,Stoczek Łukowski
+19-667-0201,41,Middle,220.77,1,Ormstown
+09-948-3150,23,High,414.06,4,Boshkengash
+07-402-7433,42,Middle,354.16,3,Dagup
+60-073-3575,30,Middle,276.77,2,Ełk
+33-200-7615,40,High,247.3,1,Jiangmen
+82-304-6495,19,High,459.39,4,Labo
+70-207-6999,36,High,383.33,3,Dakingari
+41-009-7879,27,High,156.5,3,Anyang
+89-302-8461,37,Middle,290.11,4,Nymburk
+23-066-1915,23,Middle,355.28,4,Jiangcun
+39-090-0124,31,Middle,73.74,3,Tafo
+93-867-8303,21,Middle,201.6,4,Liangnong
+43-616-8365,29,Middle,483.38,3,Kandangan
+18-263-0366,33,Middle,139.83,1,Abiko
+25-502-1415,38,High,54.17,2,Longhuashan
+50-000-9588,47,High,437.59,4,Zhovkva
+32-338-5967,32,Middle,113.57,1,Lebak
+26-672-1285,24,Middle,472.61,4,Moutnice
+76-397-3294,27,High,199.44,3,Pirané
+32-414-1466,26,High,73.32,1,Hallsberg
+83-427-3218,47,Middle,467.32,4,White River
+66-086-2306,19,Middle,249.78,1,Brandsen
+90-888-8726,48,High,347.09,1,Saint-Jouan-des-Guérets
+30-133-5120,30,Middle,448.68,3,Brikcha
+81-877-9170,30,High,157.26,1,Gegernoong
+82-389-2029,28,High,240.82,3,Sarishābāri
+91-572-6135,45,Middle,367.99,2,Chabařovice
+77-761-7475,28,Middle,204.44,3,Berezna
+78-826-3039,27,High,228.93,2,Vidual
+86-668-1045,20,High,355.31,2,Paris 17
+28-947-4295,29,Middle,325.42,1,Mozdok
+54-207-8349,40,High,333.63,2,San Luis
+26-596-5461,46,High,170.77,1,Payapa
+83-455-7266,37,Middle,235.84,3,Créteil
+88-428-8409,37,High,347.99,1,Ziniaré
+79-973-7862,47,Middle,105.29,1,Mount Ayliff
+81-814-3498,32,Middle,483.66,1,Pīrgaaj
+53-667-0793,25,High,113.01,1,La Tour-du-Pin
+61-212-1117,42,Middle,419.13,1,Pader Palwo
+09-443-7536,37,High,183.86,4,Maurisu
+53-380-3968,43,High,427.82,2,Qingyun
+58-528-6262,42,Middle,138.35,2,Sobue
+06-008-2805,32,High,462.3,4,Shādegān
+77-178-6086,42,Middle,332.67,2,Gueltat Zemmour
+83-561-3374,45,High,489.27,3,Santa Maria do Souto
+36-593-2907,42,High,157.21,3,Karafao
+93-649-9356,18,High,343.77,4,Cibuah
+38-940-4942,22,High,490.41,2,Faqqū‘ah
+53-240-2040,26,High,222.63,2,Itaguaí
+79-384-7469,50,Middle,50.79,2,Xudat
+30-839-5589,42,Middle,264.3,2,Yaodu
+76-848-9229,29,High,122.46,3,Saint-Gratien
+55-580-7707,38,High,245.98,1,Čáslav
+09-783-7921,19,High,194.08,2,Aristóbulo del Valle
+07-211-9364,45,Middle,91.24,4,Dostoyevka
+98-238-6733,42,High,425.69,4,Liuzhou
+75-845-3143,23,High,490.11,1,Rumbek
+26-028-2671,44,High,403.57,2,Cigedang
+55-876-7407,42,High,442.15,1,Muaralabuh
+42-207-5005,45,Middle,491.51,1,Santa Marta
+77-642-7686,38,High,178.61,3,Liangshuihe
+37-468-8133,44,Middle,492.51,2,Cimara
+95-148-1769,36,Middle,96.52,3,Linao
+72-324-1243,34,High,65.45,2,Bairan
+62-687-5354,23,Middle,255.86,1,Abaetetuba
+00-264-3797,26,Middle,128.01,1,Chavarría
+74-051-7865,19,High,390.44,4,Deqing
+40-450-4266,37,Middle,61.5,1,Sala
+78-796-5651,35,Middle,234.44,1,Dłutów
+78-163-4800,43,Middle,318.84,4,Regimin
+90-272-5701,28,Middle,327.32,4,Semiletka
+14-118-5229,25,Middle,475.64,2,Dayr Sharaf
+78-503-0416,25,Middle,85.57,4,Villa Dolores
+46-167-7999,44,Middle,108.5,2,Poá
+80-277-3242,36,High,342.39,3,Montreuil
+44-949-9040,23,High,446.86,2,Garibaldi
+50-510-5119,43,High,322.4,3,Montecristi
+02-911-0447,29,Middle,478.85,2,Zaječov
+77-626-7240,25,High,86.39,1,Liushun
+75-915-9803,45,High,192.35,1,Sancha
+02-677-6735,21,High,212.63,4,Cianorte
+20-460-9796,47,Middle,246.63,3,Liuzuo
+03-992-3728,26,Middle,339.32,4,‘Arad
+24-878-4507,34,High,327.05,3,Lenart v Slov. Goricah
+03-023-9932,37,High,481.78,4,Xiaruyue
+36-632-2460,23,High,131.48,1,Gweedore
+32-799-7704,34,High,402.86,2,Przelewice
+87-727-6434,28,High,73.23,2,Cravo Norte
+18-793-9543,28,High,450.47,3,Montería
+15-663-7994,20,Middle,497.8,2,Tanahmerah
+29-319-4519,32,High,171.17,4,Örebro
+18-452-1635,19,Middle,210.58,3,Pasto
+88-167-7129,40,High,162.22,1,Il’inskiy
+94-120-9525,34,High,358.5,3,Tamana
+91-857-0797,22,High,435.37,3,Pinagsibaan
+48-609-7715,43,High,426.89,3,Aguilares
+47-073-6440,21,Middle,487.25,4,Taiyuan
+50-303-1693,29,Middle,187.22,4,Chatturat
+70-774-7728,41,Middle,339.63,1,Dualing
+04-832-3559,26,Middle,88.4,4,Narol
+49-825-3438,50,High,435.23,2,Vabalninkas
+58-059-8187,27,High,207.66,2,Ozubulu
+74-882-6648,34,High,141.09,3,Nakhchivan
+03-180-9200,39,High,142.7,4,Curumaní
+66-085-1226,22,Middle,432.84,1,San Pascual
+37-037-1765,30,High,404.12,4,‘Aşīrah ash Shamālīyah
+48-630-6410,39,High,438.26,3,Dom Pedrito
+50-471-0212,19,High,233.02,3,San Sebastián de Yalí
+09-775-4058,23,High,425.21,4,Perzów
+80-728-6133,47,Middle,255.1,1,Tamorot
+58-502-7490,32,High,236.44,2,Sinchao
+22-483-3115,37,High,390.51,2,Rukem
+57-372-5969,35,High,442.29,2,Bogovarovo
+05-546-5128,21,Middle,445.34,3,Clichy
+79-759-6726,18,High,151.73,3,Kłoczew
+89-997-9041,36,High,358.11,3,Kudanding
+26-235-6745,27,High,63.6,1,Kyoto
+87-056-8987,49,High,491.92,1,Negeriagung
+00-149-4481,28,High,464.76,3,Kabale
+05-710-6109,27,High,116.92,3,Malveira
+84-724-8407,47,High,396.76,4,Veiga
+45-795-1873,20,High,393.35,4,Jagistay
+08-806-0588,25,High,434.86,4,Al Qarārah
+94-746-2001,30,Middle,489.1,4,Fandriana
+38-943-5744,19,High,288.15,4,Carregueira
+98-535-8497,35,High,105.87,1,Lincheng
+44-715-9594,23,Middle,208.59,4,Yakovlevo
+84-188-6577,39,Middle,163.22,3,Katav-Ivanovsk
+19-116-4723,45,High,364.98,1,Voznesenskoye
+55-944-9669,32,Middle,249.73,4,Sobeok
+28-855-1639,46,High,445.93,4,Jiaozuo
+58-233-5963,34,High,393.09,3,Gualeguay
+02-004-0620,32,Middle,167.61,2,Lagoa Seca
+07-395-5818,37,High,198.89,4,Ḩabābah
+07-560-6637,41,Middle,287.18,1,Lobuk
+04-052-5592,41,Middle,144.39,4,Xiaqiao
+24-109-2173,27,High,388.01,2,Messíni
+38-881-0766,27,Middle,299.75,4,Centenario
+04-468-5487,22,Middle,210.9,1,Créteil
+81-014-4502,24,Middle,424.18,4,Kelīshād va Sūdarjān
+03-669-7519,40,Middle,209.68,1,Yinying
+62-701-1037,49,Middle,192.51,2,Lazarevac
+45-584-7333,40,High,370.38,1,Tabonok
+02-711-1034,48,High,51.44,1,Likhoy
+73-991-0066,35,High,418.51,2,San Marcos de Colón
+51-220-3072,31,Middle,164.94,2,Shuntian
+17-648-0171,38,High,89.32,3,João Câmara
+53-437-2629,42,High,411.81,1,Chenguang
+46-681-0764,44,Middle,114.93,4,Muara
+43-990-6454,33,High,438.42,4,Qorveh
+55-570-3804,36,Middle,189.97,3,Bom Despacho
+47-178-9529,37,High,217.72,4,Bida
+63-808-3641,25,High,222.61,1,Pointe Michel
+40-224-1057,40,Middle,426.87,4,Sabugo
+91-810-3612,36,Middle,379.2,2,Dashkawka
+81-054-5343,45,High,138.44,2,Lianghu
+14-854-9545,45,Middle,440.62,3,Karabash
+48-918-4473,28,Middle,405.66,3,Pingtian
+08-614-6177,32,Middle,100.32,1,Sungai Raya
+90-569-7391,18,Middle,197.9,4,Skoútari
+06-638-0433,41,High,79.3,4,Doibang
+84-208-7045,33,High,55.73,3,Kazimierz Dolny
+68-458-0904,20,High,131.9,4,Pyra
+28-862-5550,49,Middle,403.03,1,General Lavalle
+85-666-7449,26,High,338.6,3,Zhongzhang
+39-107-6852,21,Middle,433.99,2,Xinglongchang
+94-495-3402,49,High,235.13,3,Mojogajeh
+76-620-2994,26,High,482.5,1,Na Muen
+60-834-3348,32,Middle,433.14,3,Gafargaon
+05-167-0833,21,Middle,381.3,4,Labège
+14-415-2802,29,Middle,408.81,3,Sauri
+49-469-9163,20,Middle,118.65,2,Desakolot
+67-937-6624,50,High,166.45,1,Huambo
+91-761-9492,29,Middle,385.32,1,Luoting
+15-625-4047,39,Middle,130.92,2,La Unión
+71-436-6908,47,High,237.57,3,Arnprior
+50-637-1630,42,High,427.94,2,Inderka
+41-130-2570,33,Middle,332.79,1,Oekero
+25-285-7453,32,High,78.9,1,Cluses
+47-225-8686,29,High,122.55,3,Wrząsowice
+30-735-8744,24,Middle,465.07,2,Nawu
+98-585-4742,38,High,113.51,2,Ágios Andréas
+51-302-9537,40,High,492.74,3,Cibeusi
+30-522-1574,31,Middle,127.18,2,Xincheng
+43-715-8777,27,Middle,476.63,2,Minneapolis
+96-915-4091,36,High,398.97,3,Ḩawallī
+02-725-7664,43,High,294.61,2,Klishkivtsi
+20-648-1010,34,High,109.88,3,Zilang
+79-939-5393,21,High,182.54,1,Camalote
+34-874-7357,21,High,281.37,2,Fort Wayne
+98-376-8787,36,High,85.52,3,Pho Duc
+84-637-9188,35,Middle,207.11,1,Wuyang
+81-111-7832,50,High,378.87,2,Pelasgía
+11-121-0709,42,Middle,410.29,4,Kara Suu
+61-176-8712,27,High,225.12,1,Cerro
+72-339-1854,19,High,363.84,3,Sacramento
+24-591-4327,35,High,317.09,2,Nowe Brzesko
+63-680-7694,29,High,154.19,1,Mbala
+51-431-7150,41,Middle,84.15,1,Shiqiao
+29-438-8126,36,Middle,462.48,2,Pasirmadang
+07-314-2945,25,Middle,314.36,4,Tiwi
+64-490-6975,46,Middle,367.7,3,Ahar
+90-918-2833,48,High,132.67,3,Soroti
+53-409-1176,26,High,416.96,1,Caruaru
+10-870-3357,45,Middle,487.96,2,Boundiali
+41-816-7753,22,Middle,150.11,3,Götene
+68-296-5978,36,High,218.87,4,Kadumelati
+23-758-1012,39,Middle,190.06,2,Myingyan
+34-788-8387,38,Middle,485.76,4,Qingqu
+86-359-7320,43,Middle,136.1,2,Phu Loc
+27-111-2242,40,High,249.02,1,Jembangan
+84-538-0238,19,Middle,466.74,3,Harhorin
+27-672-6081,35,High,246.44,3,Bangbayang
+66-033-0540,34,High,93.52,2,Stěbořice
+99-643-9845,28,Middle,137.75,1,Banturkrajan
+27-571-9402,44,Middle,78.64,3,São Torcato
+41-602-4042,47,High,363.91,2,Oslo
+78-214-5658,48,Middle,59.15,1,Villavicencio
+55-955-9889,31,High,280.88,2,Wailang
+34-237-3943,44,Middle,283.7,3,Fangshan
+19-386-9088,24,High,411.95,4,Tallahassee
+83-752-5439,28,Middle,399.24,2,Mulhouse
+25-485-2023,26,Middle,90.79,2,Tangkilsari
+22-039-6819,28,Middle,160.47,3,Queluz
+50-395-1941,30,High,104.74,4,Särkisalo
+99-771-9310,37,High,399.95,2,Vitoria-Gasteiz
+81-926-9297,22,Middle,193.94,3,Gävle
+68-971-6148,45,High,462.24,1,Palampal
+05-506-7216,36,High,352.35,1,Don Carlos
+43-386-2489,27,High,253.29,4,Naghalin
+67-438-2378,29,Middle,217.62,3,Honolulu
+84-162-8799,43,Middle,385.08,1,Khilok
+42-859-2475,40,Middle,399.56,4,Yenakiyeve
+57-797-8139,43,High,332.14,2,Sakété
+30-038-8752,49,High,365.88,1,Antrukan
+06-237-7338,27,Middle,354.92,1,Dhahab
+97-738-8095,45,High,461.16,3,Lonpao Dajah
+15-421-1255,24,High,497.75,1,Nanqiao
+92-142-4328,45,Middle,492.83,4,San Carlos
+06-357-6548,39,Middle,295.54,4,Ishikawa
+80-508-9866,46,Middle,290.56,1,Estância
+27-100-0661,29,High,206.79,2,Las Lomas
+53-843-5619,38,High,83.21,4,Orsay
+44-786-7696,41,Middle,54.74,4,Zhongying
+78-361-5100,44,Middle,52.24,4,As Sawdā
+67-639-5838,23,Middle,216.84,1,Shimorskoye
+51-415-1931,42,High,75.27,3,Kościelec
+96-764-3843,20,Middle,308.87,2,Yongfu
+64-090-3433,35,Middle,251.93,3,Bollène
+96-140-1936,30,Middle,477.35,2,Baihe
+38-830-6976,31,High,86.63,2,Puqi
+79-711-6779,34,High,429.24,1,Hoolt
+22-860-9860,24,High,470.38,3,Pasinan Barat
+76-213-5806,21,High,129.64,3,Rende
+62-974-7965,30,High,58.27,4,Újezd
+21-232-1397,25,Middle,190.76,3,Bhadrapur
+91-053-3261,49,Middle,435.52,2,Youcheng
+74-281-3421,50,Middle,96.68,3,Panyam
+24-272-6205,39,High,161.85,4,Cigadog
+77-796-5786,42,Middle,330.36,4,Beiyuan
+51-313-7293,31,High,236.05,4,Malakhovka
+95-876-9757,31,High,344.43,4,Emar
+27-619-9264,23,High,391.87,2,Göteborg
+51-116-5937,25,High,204.29,1,Lazarat
+96-484-1000,26,Middle,258.02,4,Xiangshan
+07-834-3350,29,High,181.87,4,San Luis
+11-802-5604,26,High,81.18,3,Zengfu
+31-491-8457,47,High,402.82,2,Tipaz
+86-257-9581,30,High,497.76,3,Wādī as Salqā
+22-981-6595,26,High,227.58,1,Wasagu
+46-098-9737,35,Middle,411.83,3,Chivilcoy
+53-102-9949,41,Middle,298.93,1,Libei
+28-969-7540,44,High,136.67,2,Kuçovë
+30-083-9565,37,Middle,324.11,2,Bokong Timur
+30-975-0306,40,High,105.64,1,Gaowu
+09-737-8354,37,Middle,173.43,1,Tandahimba
+25-560-4506,31,High,254.83,2,Paya Dapur
+34-265-8558,22,High,429.24,3,Antipolo
+37-361-8691,40,High,489.81,1,Maguwon
+19-560-0717,50,Middle,460.88,4,Pombas
+83-982-5300,27,Middle,310.16,4,Chum Phae
+26-150-0209,28,Middle,82.37,4,Taiyigong
+16-070-0138,39,High,241.1,2,Njeru
+36-444-5336,48,Middle,276.25,4,Jianggang
+54-680-5344,29,Middle,318.45,4,Langkou
+59-971-0799,48,Middle,476.42,2,Vichuga
+64-031-2046,29,High,392.27,2,Luci
+47-528-3961,24,High,251.63,2,Faīẕābād
+96-772-7220,40,High,341.24,3,Tanjungbalai
+25-866-7286,30,Middle,211.39,1,Carrefour
+72-694-4159,39,Middle,379.21,1,Tewulike
+06-061-0023,20,High,479.62,3,Kembé
+23-617-2637,50,Middle,180.21,1,Hekou
+24-371-5870,49,Middle,362.3,4,Masuda
+02-055-8248,25,High,159.53,3,Martanesh
+85-922-0190,19,High,206.32,4,Nanfeng
+46-978-3874,22,High,91.34,1,Rio Pardo
+53-595-7635,25,High,455.44,3,Pingtang
+20-562-2569,44,High,463.67,4,Aramayuan

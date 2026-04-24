@@ -1,0 +1,7 @@
+,Purchase_Amount,Purchase_Amount,Purchase_Amount,Age,Customer_Satisfaction,Frequency_of_Purchase
+,mean,median,count,mean,mean,mean
+Customer_Segment,,,,,,
+0,264.4,267.71,264,37.81,8.22,6.68
+1,307.94,326.08,243,25.17,6.24,7.26
+2,330.32,355.31,253,33.41,2.99,6.59
+3,195.26,170.02,240,40.64,3.99,7.29
