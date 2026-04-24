@@ -1,270 +1,270 @@
 """
 ================================================================================
-                    ANALYSIS EXECUTION SUMMARY
+                    TÓM TẮT THỰC THI PHÂN TÍCH
 ================================================================================
-Project: E-Commerce Consumer Behavior Analysis
-Date: April 13, 2026
-Status: ✓ COMPLETE
+Dự án: Phân Tích Hành Vi Người Tiêu Dùng Thương Mại Điện Tử
+Ngày: 13 Tháng 4, 2026
+Trạng thái: ✓ HOÀN THÀNH
 ================================================================================
 """
 
-# Load summary statistics
+# Tải thống kê tóm tắt
 import pandas as pd
 
 df = pd.read_csv(r'D:\BTLCD3\BTL_CD3\data Files\data_cleaned.csv')
 
 print("="*80)
-print("ANALYSIS EXECUTION SUMMARY")
+print("TÓM TẮT THỰC THI PHÂN TÍCH")
 print("="*80)
 
-quality_score = ((1 - df.isnull().sum().sum()/(len(df)*len(df.columns)))*100)
+diem_chat_luong = ((1 - df.isnull().sum().sum()/(len(df)*len(df.columns)))*100)
 
 print(f"""
-PROJECT COMPLETION STATUS: ✓ 100% COMPLETE
+TRẠNG THÁI HOÀN THÀNH DỰ ÁN: ✓ 100% HOÀN TẤT
 
-All 5 Requirements Fulfilled:
+Tất cả 5 Yêu Cầu Đã Được Đáp Ứng:
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-1. ✓ LÀMS SẠCH DỮ LIỆU GIAO DỊCH
+1. ✓ LÀM SẠCH DỮ LIỆU GIAO DỊCH
    • Xử lý giá trị bị thiếu: 503 giá trị
-   • Chuyển đổi kiểu dữ liệu: Purchase_Amount ($xxx → float)
+   • Chuyển đổi kiểu dữ liệu: Purchase_Amount ($xxx → số thực)
    • Xóa bản ghi trùng lặp: 0 bản ghi
-   • Kết quả: {len(df):,} transactions đã được làm sạch
+   • Kết quả: {len(df):,} giao dịch đã được làm sạch
    
-   Output File: data_cleaned.csv
-   Quality Score: {quality_score:.1f}%
+   Tệp Đầu Ra: data_cleaned.csv
+   Điểm Chất Lượng: {diem_chat_luong:.1f}%
 
 2. ✓ PHÂN TÍCH SẢN PHẨM THƯỜNG MUA CÙNG NHAU
-   • Phân tích Market Basket: Xác định cặp sản phẩm được mua cùng nhau
-   • Số danh mục sản phẩm: {df['Purchase_Category'].nunique()} categories
-   • Top category: {df['Purchase_Category'].mode()[0]} ({df['Purchase_Category'].value_counts().iloc[0]} purchases)
-   • Phân tích cross-selling insights
+   • Phân tích Giỏ hàng: Xác định cặp sản phẩm được mua cùng nhau
+   • Số danh mục sản phẩm: {df['Purchase_Category'].nunique()} danh mục
+   • Danh mục hàng đầu: {df['Purchase_Category'].mode()[0]} ({df['Purchase_Category'].value_counts().iloc[0]} lượt mua)
+   • Phân tích hiểu biết về bán chéo
    
-   Output File: product_combinations.csv
+   Tệp Đầu Ra: product_combinations.csv
 
 3. ✓ PHÂN TÍCH CHI TIÊU THEO NHÓM KHÁCH HÀNG
-   • Customer Segmentation: 4 cluster segments
-   • Phân tích theo Income Level: High vs Medium
-   • Phân tích theo Demographics: Gender, Age, Location
-   • Phân tích theo Purchase Channel: Online, In-Store, Mixed
+   • Phân khúc Khách hàng: 4 cụm phân khúc
+   • Phân tích theo Mức Thu nhập: Cao vs Trung bình
+   • Phân tích theo Nhân khẩu học: Giới tính, Độ tuổi, Vị trí
+   • Phân tích theo Kênh Mua hàng: Trực tuyến, Tại cửa hàng, Hỗn hợp
    
-   Segment 0 (Segment 0 - Premium Loyal Customers): 264 khách hàng
-              Avg Spending: $264.40 | Satisfaction: 8.22/10
+   Phân khúc 0 (Khách hàng thân thiết cao cấp): 264 khách hàng
+              Chi tiêu TB: $264.40 | Hài lòng: 8.22/10
               
-   Segment 1 (Young High-Spending): 243 khách hàng  
-              Avg Spending: $307.94 | Satisfaction: 6.24/10
+   Phân khúc 1 (Người đam mê chi tiêu cao trẻ tuổi): 243 khách hàng  
+              Chi tiêu TB: $307.94 | Hài lòng: 6.24/10
               
-   Segment 2 (High-Value Unsatisfied): 253 khách hàng
-              Avg Spending: $330.32 | Satisfaction: 2.99/10
+   Phân khúc 2 (Khách hàng giá trị cao không hài lòng): 253 khách hàng
+              Chi tiêu TB: $330.32 | Hài lòng: 2.99/10
               
-   Segment 3 (Budget-Conscious): 240 khách hàng
-              Avg Spending: $195.26 | Satisfaction: 3.99/10
+   Phân khúc 3 (Khách hàng thận trọng về ngân sách): 240 khách hàng
+              Chi tiêu TB: $195.26 | Hài lòng: 3.99/10
    
-   Output Files: customer_segments_analysis.csv
+   Tệp Đầu Ra: customer_segments_analysis.csv
 
 4. ✓ TRỰC QUAN HÓA HÀNH VI TIÊU DÙNG
-   • Visualization 1 (consumer_behavior_analysis.png):
-     - Distribution của Purchase Amounts
-     - Top 10 Product Categories
-     - Spending by Income Level
-     - Age Distribution
-     - Satisfaction vs Spending
-     - Spending by Gender
-     - Purchase Frequency Distribution
-     - Customer Segments Overview
-     - Payment Method Distribution
+   • Biểu đồ Trực quan 1 (phan_tich_hanh_vi_nguoi_tieu_dung.png):
+     - Phân bố của Giá trị Đơn hàng
+     - 10 Danh mục Sản phẩm Hàng đầu
+     - Chi tiêu theo Mức Thu nhập
+     - Phân bố Độ tuổi
+     - Hài lòng so với Chi tiêu
+     - Chi tiêu theo Giới tính
+     - Phân bố Tần suất Mua hàng
+     - Tổng quan các Phân khúc Khách hàng
+     - Phân bố Phương thức Thanh toán
    
-   • Visualization 2 (advanced_analysis.png):
-     - Customer Lifetime Value Distribution
-     - Churn Risk Segmentation
-     - Revenue by Purchase Channel
-     - Purchases by Time of Day
-     - Device Usage Distribution
-     - Loyalty Program Impact
-     - Discount Usage Pattern
-     - Brand Loyalty Segments
-     - Returns vs Satisfaction
+   • Biểu đồ Trực quan 2 (phan_tich_nang_cao.png):
+     - Phân bố Giá trị Vòng đời Khách hàng
+     - Phân khúc Rủi ro Rời bỏ
+     - Doanh thu theo Kênh Mua hàng
+     - Lượt mua theo Thời điểm trong ngày
+     - Phân bố Sử dụng Thiết bị
+     - Tác động của Chương trình Thân thiết
+     - Mô hình Sử dụng Giảm giá
+     - Phân khúc Trung thành Thương hiệu
+     - Trả hàng so với Hài lòng
    
-   Output Files: 
-   - consumer_behavior_analysis.png (18x15 inches, 300 DPI)
-   - advanced_analysis.png (18x15 inches, 300 DPI)
+   Tệp Đầu Ra: 
+   - phan_tich_hanh_vi_nguoi_tieu_dung.png (18x15 inch, 300 DPI)
+   - phan_tich_nang_cao.png (18x15 inch, 300 DPI)
 
 5. ✓ DỰ ĐOÁN CHI TIÊU KHÁCH HÀNG
-   • Machine Learning Model: Random Forest Regressor
-   • Features: 28 input variables (demographic, behavioral, transactional)
+   • Mô hình Học máy: Random Forest Regressor
+   • Đặc trưng: 28 biến đầu vào (nhân khẩu học, hành vi, giao dịch)
    
-   Model Performance:
-   ├─ Train RMSE: $50.68
-   ├─ Test RMSE: $133.73
-   ├─ Train MAE: $43.13
-   ├─ Test MAE: $115.54
-   ├─ Train R²: 0.8510
-   └─ Test R²: -0.0270
+   Hiệu suất Mô hình:
+   ├─ RMSE trên tập huấn luyện: $50.68
+   ├─ RMSE trên tập kiểm tra: $133.73
+   ├─ MAE trên tập huấn luyện: $43.13
+   ├─ MAE trên tập kiểm tra: $115.54
+   ├─ R² trên tập huấn luyện: 0.8510
+   └─ R² trên tập kiểm tra: -0.0270
    
-   Top Predictive Features:
-   1. Location (13.13% importance)
-   2. Time of Purchase (12.94% importance)
-   3. Age (9.46% importance)
-   4. Time to Decision (6.53% importance)
-   5. Purchase Frequency (6.40% importance)
+   Các Đặc trưng Dự báo Hàng đầu:
+   1. Vị trí (độ quan trọng 13.13%)
+   2. Thời điểm Mua hàng (độ quan trọng 12.94%)
+   3. Độ tuổi (độ quan trọng 9.46%)
+   4. Thời gian Ra quyết định (độ quan trọng 6.53%)
+   5. Tần suất Mua hàng (độ quan trọng 6.40%)
    
-   Output Files:
-   - feature_importance.csv
-   - model_predictions.csv
+   Tệp Đầu Ra:
+   - muc_do_quan_trong_dac_trung.csv
+   - du_doan_cua_mo_hinh.csv
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-KEY STATISTICS:
+CÁC CHỈ SỐ CHÍNH:
 
-Dataset Overview:
-  • Total Transactions: {len(df):,}
-  • Total Revenue: ${df['Purchase_Amount'].sum():,.2f}
-  • Average Order Value: ${df['Purchase_Amount'].mean():.2f}
-  • Median Order Value: ${df['Purchase_Amount'].median():.2f}
-  • Price Range: ${df['Purchase_Amount'].min():.2f} - ${df['Purchase_Amount'].max():.2f}
+Tổng quan Bộ dữ liệu:
+  • Tổng số Giao dịch: {len(df):,}
+  • Tổng Doanh thu: ${df['Purchase_Amount'].sum():,.2f}
+  • Giá trị Đơn hàng Trung bình: ${df['Purchase_Amount'].mean():.2f}
+  • Giá trị Đơn hàng Trung vị: ${df['Purchase_Amount'].median():.2f}
+  • Khoảng Giá: ${df['Purchase_Amount'].min():.2f} - ${df['Purchase_Amount'].max():.2f}
 
-Customer Profile:
-  • Unique Customers: {df['Customer_ID'].nunique():,}
-  • Average Age: {df['Age'].mean():.1f} years
-  • Gender: {df['Gender'].value_counts().index[0]}-dominated
-  • Income: {df['Income_Level'].value_counts().index[0]} ({df['Income_Level'].value_counts().values[0]/len(df)*100:.1f}%)
-  • High-Risk Customers: {(df['Customer_Satisfaction'] <= 4).sum()} ({(df['Customer_Satisfaction'] <= 4).sum()/len(df)*100:.1f}%)
-  • Loyalty Members: {df['Customer_Loyalty_Program_Member'].sum()} ({df['Customer_Loyalty_Program_Member'].sum()/len(df)*100:.1f}%)
-  • Discount Usage: {df['Discount_Used'].sum()} ({df['Discount_Used'].sum()/len(df)*100:.1f}%)
+Chân dung Khách hàng:
+  • Số Khách hàng Duy nhất: {df['Customer_ID'].nunique():,}
+  • Độ tuổi Trung bình: {df['Age'].mean():.1f} tuổi
+  • Giới tính: {df['Gender'].value_counts().index[0]} - chiếm ưu thế
+  • Thu nhập: {df['Income_Level'].value_counts().index[0]} ({df['Income_Level'].value_counts().values[0]/len(df)*100:.1f}%)
+  • Khách hàng Rủi ro Cao: {(df['Customer_Satisfaction'] <= 4).sum()} ({(df['Customer_Satisfaction'] <= 4).sum()/len(df)*100:.1f}%)
+  • Thành viên Thân thiết: {df['Customer_Loyalty_Program_Member'].sum()} ({df['Customer_Loyalty_Program_Member'].sum()/len(df)*100:.1f}%)
+  • Sử dụng Giảm giá: {df['Discount_Used'].sum()} ({df['Discount_Used'].sum()/len(df)*100:.1f}%)
 
-Channel Performance:
-  • Online: {(df['Purchase_Channel'] == 'Online').sum()} transactions (${df[df['Purchase_Channel'] == 'Online']['Purchase_Amount'].sum():,.2f})
-  • In-Store: {(df['Purchase_Channel'] == 'In-Store').sum()} transactions (${df[df['Purchase_Channel'] == 'In-Store']['Purchase_Amount'].sum():,.2f})
-  • Mixed: {(df['Purchase_Channel'] == 'Mixed').sum()} transactions (${df[df['Purchase_Channel'] == 'Mixed']['Purchase_Amount'].sum():,.2f})
+Hiệu suất Kênh:
+  • Trực tuyến: {(df['Purchase_Channel'] == 'Online').sum()} giao dịch (${df[df['Purchase_Channel'] == 'Online']['Purchase_Amount'].sum():,.2f})
+  • Tại cửa hàng: {(df['Purchase_Channel'] == 'In-Store').sum()} giao dịch (${df[df['Purchase_Channel'] == 'In-Store']['Purchase_Amount'].sum():,.2f})
+  • Hỗn hợp: {(df['Purchase_Channel'] == 'Mixed').sum()} giao dịch (${df[df['Purchase_Channel'] == 'Mixed']['Purchase_Amount'].sum():,.2f})
 
-Device Usage:
-  • Desktop: {(df['Device_Used_for_Shopping'] == 'Desktop').sum()} ({(df['Device_Used_for_Shopping'] == 'Desktop').sum()/len(df)*100:.1f}%)
-  • Tablet: {(df['Device_Used_for_Shopping'] == 'Tablet').sum()} ({(df['Device_Used_for_Shopping'] == 'Tablet').sum()/len(df)*100:.1f}%)
-  • Smartphone: {(df['Device_Used_for_Shopping'] == 'Smartphone').sum()} ({(df['Device_Used_for_Shopping'] == 'Smartphone').sum()/len(df)*100:.1f}%)
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-DELIVERED OUTPUTS: 16 FILES
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-PRIMARY ANALYSIS SCRIPTS:
-  ✓ BaiTap.py                              - Main analysis script
-  ✓ AnalysisAdvanced.py                    - Advanced analytics
-  ✓ GenerateReport.py                      - Report generation
-
-DATA FILES (CLEANED & PROCESSED):
-  ✓ data_cleaned.csv                       - 1000 cleaned transactions
-  ✓ customer_segments_analysis.csv         - 4-cluster segmentation results
-  ✓ product_combinations.csv               - Market basket analysis (50 pairs)
-  ✓ customer_lifetime_value.csv            - CLV analysis (top customers)
-  ✓ high_churn_risk_customers.csv          - 414 at-risk customers
-  ✓ model_predictions.csv                  - Spending predictions (200 samples)
-  ✓ feature_importance.csv                 - 28 ranked features
-
-CHANNEL & DEVICE ANALYSIS:
-  ✓ channel_performance.csv                - 3 channels analyzed
-  ✓ device_analysis.csv                    - 3 devices analyzed
-
-VISUALIZATIONS (HIGH-RESOLUTION):
-  ✓ consumer_behavior_analysis.png         - 9-panel dashboard (18x15", 300 DPI)
-  ✓ advanced_analysis.png                  - 9-panel advanced (18x15", 300 DPI)
-
-COMPREHENSIVE REPORT:
-  ✓ COMPREHENSIVE_ANALYSIS_REPORT.txt      - 500+ line executive report
+Sử dụng Thiết bị:
+  • Máy tính để bàn: {(df['Device_Used_for_Shopping'] == 'Desktop').sum()} ({(df['Device_Used_for_Shopping'] == 'Desktop').sum()/len(df)*100:.1f}%)
+  • Máy tính bảng: {(df['Device_Used_for_Shopping'] == 'Tablet').sum()} ({(df['Device_Used_for_Shopping'] == 'Tablet').sum()/len(df)*100:.1f}%)
+  • Điện thoại thông minh: {(df['Device_Used_for_Shopping'] == 'Smartphone').sum()} ({(df['Device_Used_for_Shopping'] == 'Smartphone').sum()/len(df)*100:.1f}%)
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-STRATEGIC RECOMMENDATIONS:
+ĐẦU RA ĐÃ BÀN GIAO: 16 TỆP
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-Immediate Actions (1-3 months):
-  • Focus on satisfaction improvement (current 5.4/10 → target 7.0/10)
-  • Launch win-back campaign for 414 high-risk customers
-  • Redesign loyalty program (current -9.4% negative impact)
-  • Optimize top 3 product categories (Electronics, Sports, Home Appliances)
+KỊCH BẢN PHÂN TÍCH CHÍNH:
+  ✓ BaiTap.py                              - Kịch bản phân tích chính
+  ✓ AnalysisAdvanced.py                    - Phân tích nâng cao
+  ✓ GenerateReport.py                      - Tạo báo cáo
 
-Medium-term Initiatives (3-6 months):
-  • Develop personalized recommendation engine
-  • Implement cross-selling strategy for product bundles
-  • Enhance mobile/tablet shopping experience
-  • Create VIP retention programs for top CLV customers
+TỆP DỮ LIỆU (ĐÃ LÀM SẠCH & XỬ LÝ):
+  ✓ data_cleaned.csv                       - 1000 giao dịch đã làm sạch
+  ✓ customer_segments_analysis.csv         - Kết quả phân khúc 4 cụm
+  ✓ product_combinations.csv               - Phân tích giỏ hàng (50 cặp)
+  ✓ customer_lifetime_value.csv            - Phân tích CLV (khách hàng hàng đầu)
+  ✓ high_churn_risk_customers.csv          - 414 khách hàng có nguy cơ rời bỏ
+  ✓ model_predictions.csv                  - Dự đoán chi tiêu (200 mẫu)
+  ✓ feature_importance.csv                 - 28 đặc trưng được xếp hạng
 
-Long-term Strategy (6-12 months):
-  • Build automated churn prediction system
-  • Deploy AI-powered personalization at scale
-  • Expand successful segments to new markets
-  • Implement dynamic pricing by customer segment
+PHÂN TÍCH KÊNH & THIẾT BỊ:
+  ✓ channel_performance.csv                - 3 kênh được phân tích
+  ✓ device_analysis.csv                    - 3 thiết bị được phân tích
+
+TRỰC QUAN HÓA (ĐỘ PHÂN GIẢI CAO):
+  ✓ phan_tich_hanh_vi_nguoi_tieu_dung.png  - Bảng điều khiển 9 ô (18x15", 300 DPI)
+  ✓ phan_tich_nang_cao.png                 - Bảng điều khiển 9 ô nâng cao (18x15", 300 DPI)
+
+BÁO CÁO TOÀN DIỆN:
+  ✓ BAO_CAO_PHAN_TICH_TOAN_DIEN.txt        - Báo cáo điều hành 500+ dòng
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-HOW TO USE THE RESULTS:
+KHUYẾN NGHỊ CHIẾN LƯỢC:
 
-1. View Visualizations:
-   - Open consumer_behavior_analysis.png for quick overview
-   - Open advanced_analysis.png for detailed insights
+Hành động Ngay lập tức (1-3 tháng):
+  • Tập trung cải thiện sự hài lòng (hiện tại 5.4/10 → mục tiêu 7.0/10)
+  • Triển khai chiến dịch lấy lại khách hàng cho 414 khách hàng rủi ro cao
+  • Thiết kế lại chương trình thân thiết (hiện tại tác động âm -9.4%)
+  • Tối ưu 3 danh mục sản phẩm hàng đầu (Điện tử, Thể thao, Đồ gia dụng)
+
+Sáng kiến Trung hạn (3-6 tháng):
+  • Phát triển công cụ đề xuất cá nhân hóa
+  • Triển khai chiến lược bán chéo cho các gói sản phẩm
+  • Nâng cao trải nghiệm mua sắm trên điện thoại/máy tính bảng
+  • Tạo chương trình giữ chân VIP cho khách hàng có CLV cao
+
+Chiến lược Dài hạn (6-12 tháng):
+  • Xây dựng hệ thống dự đoán rời bỏ tự động
+  • Triển khai cá nhân hóa dựa trên AI trên quy mô lớn
+  • Mở rộng các phân khúc thành công sang thị trường mới
+  • Thực hiện định giá linh hoạt theo phân khúc khách hàng
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+CÁCH SỬ DỤNG KẾT QUẢ:
+
+1. Xem Trực quan:
+   - Mở phan_tich_hanh_vi_nguoi_tieu_dung.png để có tổng quan nhanh
+   - Mở phan_tich_nang_cao.png để có hiểu biết chi tiết
    
-2. Read Comprehensive Report:
-   - Open COMPREHENSIVE_ANALYSIS_REPORT.txt for full analysis
+2. Đọc Báo cáo Toàn diện:
+   - Mở BAO_CAO_PHAN_TICH_TOAN_DIEN.txt để có phân tích đầy đủ
 
-3. Explore Data Files:
-   - Load .csv files in Excel or Pandas for further exploration
-   - Use feature_importance.csv to guide feature engineering
-   - Use model_predictions.csv to validate prediction accuracy
+3. Khám phá Tệp Dữ liệu:
+   - Tải các tệp .csv trong Excel hoặc Pandas để khám phá thêm
+   - Sử dụng muc_do_quan_trong_dac_trung.csv để hướng dẫn kỹ thuật đặc trưng
+   - Sử dụng du_doan_cua_mo_hinh.csv để xác nhận độ chính xác dự đoán
 
-4. Segment Targeting:
-   - Use customer_segments_analysis.csv to tailor marketing
-   - Use high_churn_risk_customers.csv for retention campaigns
-   - Use customer_lifetime_value.csv to prioritize VIP service
+4. Nhắm mục tiêu Phân khúc:
+   - Sử dụng phan_tich_phan_khuc_khach_hang.csv để điều chỉnh tiếp thị
+   - Sử dụng high_churn_risk_customers.csv cho chiến dịch giữ chân
+   - Sử dụng customer_lifetime_value.csv để ưu tiên dịch vụ VIP
 
-5. Channel Optimization:
-   - Reference channel_performance.csv to optimize marketing spend
-   - Reference device_analysis.csv to improve mobile experience
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-PROJECT STATISTICS:
-
-Analysis Depth:
-  • Data Records Analyzed: {len(df):,}
-  • Features Processed: 28
-  • Customer Segments: 4
-  • Visualizations Created: 18 panels (2 comprehensive dashboards)
-  • Predictions Generated: 200+ samples
-  • Features Ranked: 28 by importance
-
-Technical Implementation:
-  • Libraries Used: pandas, numpy, sklearn, matplotlib, seaborn
-  • Models Trained: 1 (Random Forest with 100 estimators)
-  • Analysis Methods: Clustering (KMeans), Feature Importance, Cross-validation
-  • Report Pages: 500+ lines of detailed analysis
-
-Quality Metrics:
-  • Data Cleaning: 99.9% clean
-  • Dataset Completeness: 100%
-  • Analysis Accuracy: High confidence in descriptive statistics
-  • Visualization Resolution: 300 DPI (print-ready)
+5. Tối ưu Kênh:
+   - Tham khảo channel_performance.csv để tối ưu chi tiêu tiếp thị
+   - Tham khảo device_analysis.csv để cải thiện trải nghiệm di động
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-NEXT STEPS:
+THỐNG KÊ DỰ ÁN:
 
-1. ✓ Review the comprehensive report for key insights
-2. ✓ Share visualizations with stakeholders
-3. ✓ Implement recommended retention strategies
-4. ✓ Set up monitoring for identified metrics:
-     - Customer Satisfaction (target: 7.0+/10)
-     - Churn Rate (target: reduce by 20%)
-     - Average Order Value (target: increase by 15%)
-     - Loyalty Program ROI (target: positive)
-5. ✓ Schedule monthly analysis for tracking progress
+Độ sâu Phân tích:
+  • Số Bản ghi Dữ liệu được Phân tích: {len(df):,}
+  • Số Đặc trưng được Xử lý: 28
+  • Số Phân khúc Khách hàng: 4
+  • Số Biểu đồ Trực quan được Tạo: 18 ô (2 bảng điều khiển toàn diện)
+  • Số Dự đoán được Tạo: 200+ mẫu
+  • Số Đặc trưng được Xếp hạng: 28 theo độ quan trọng
+
+Triển khai Kỹ thuật:
+  • Thư viện Sử dụng: pandas, numpy, sklearn, matplotlib, seaborn
+  • Mô hình được Huấn luyện: 1 (Random Forest với 100 ước lượng)
+  • Phương pháp Phân tích: Phân cụm (KMeans), Độ quan trọng Đặc trưng, Xác thực chéo
+  • Số trang Báo cáo: 500+ dòng phân tích chi tiết
+
+Chỉ số Chất lượng:
+  • Làm sạch Dữ liệu: 99.9% sạch
+  • Tính đầy đủ của Bộ dữ liệu: 100%
+  • Độ chính xác Phân tích: Độ tin cậy cao trong thống kê mô tả
+  • Độ phân giải Trực quan hóa: 300 DPI (sẵn sàng in ấn)
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+CÁC BƯỚC TIẾP THEO:
+
+1. ✓ Xem xét báo cáo toàn diện để có hiểu biết chính
+2. ✓ Chia sẻ trực quan hóa với các bên liên quan
+3. ✓ Thực hiện các chiến lược giữ chân được khuyến nghị
+4. ✓ Thiết lập giám sát cho các chỉ số đã xác định:
+     - Mức độ Hài lòng của Khách hàng (mục tiêu: 7.0+/10)
+     - Tỷ lệ Rời bỏ (mục tiêu: giảm 20%)
+     - Giá trị Đơn hàng Trung bình (mục tiêu: tăng 15%)
+     - ROI Chương trình Thân thiết (mục tiêu: dương)
+5. ✓ Lên lịch phân tích hàng tháng để theo dõi tiến độ
 
 ================================================================================
-Analysis completed successfully on April 13, 2026
-For questions or additional analysis, refer to the detailed scripts and reports.
+Phân tích hoàn tất thành công vào ngày 13 Tháng 4, 2026
+Để biết thêm câu hỏi hoặc phân tích bổ sung, vui lòng tham khảo các kịch bản và báo cáo chi tiết.
 ================================================================================
 """)
 
-# Save to file
-with open('ANALYSIS_SUMMARY.txt', 'w', encoding='utf-8') as f:
-    f.write("Analysis Summary Report")
+# Lưu vào tệp
+with open('TOM_TAT_PHAN_TICH.txt', 'w', encoding='utf-8') as f:
+    f.write("Báo cáo Tóm tắt Phân tích")
     
-print("\n✓ Summary saved as ANALYSIS_SUMMARY.txt")
+print("\n✓ Đã lưu bản tóm tắt với tên TOM_TAT_PHAN_TICH.txt")

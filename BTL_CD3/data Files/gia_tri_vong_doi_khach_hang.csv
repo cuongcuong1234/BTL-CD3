@@ -1,4 +1,4 @@
-Customer_ID,Age,Income_Level,Purchase_Amount,Frequency_of_Purchase,Customer_Satisfaction,Potential_CLV
+Customer_ID,Age,Income_Level,Purchase_Amount,Frequency_of_Purchase,Customer_Satisfaction,CLV_Tiem_nang
 90-144-9193,21,Middle,486.4,12,9,5253.12
 42-518-2602,30,Middle,473.96,12,9,5118.767999999999
 27-347-7437,44,High,405.7,12,10,4868.4

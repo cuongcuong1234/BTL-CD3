@@ -12,267 +12,267 @@ from collections import Counter
 import warnings
 warnings.filterwarnings('ignore')
 
-# ================== 1. LOAD & CLEAN DATA ==================
+# ================== 1. TẢI & LÀM SẠCH DỮ LIỆU ==================
 print("="*60)
-print("1. LOADING AND CLEANING DATA")
+print("1. TẢI VÀ LÀM SẠCH DỮ LIỆU")
 print("="*60)
 
-df = pd.read_csv('Ecommerce_Consumer_Behavior_Analysis_Data.csv')
-print(f"Original data shape: {df.shape}")
-print(f"\nMissing values:\n{df.isnull().sum()[df.isnull().sum() > 0]}")
+df = pd.read_csv('BTL_CD3/data Files/Ecommerce_Consumer_Behavior_Analysis_Data.csv')
+print(f"Kích thước dữ liệu gốc: {df.shape}")
+print(f"\nGiá trị thiếu:\n{df.isnull().sum()[df.isnull().sum() > 0]}")
 
-# Make a copy for processing
-df_clean = df.copy()
+# Tạo bản sao để xử lý
+df_sach = df.copy()
 
-# Clean Purchase_Amount: Remove "$" and convert to float
-df_clean['Purchase_Amount'] = df_clean['Purchase_Amount'].str.replace('$', '').astype(float)
+# Làm sạch cột Purchase_Amount: Loại bỏ "$" và chuyển sang số thực
+df_sach['Purchase_Amount'] = df_sach['Purchase_Amount'].str.replace('$', '').astype(float)
 
-# Handle missing values
-# For Social_Media_Influence and Engagement_with_Ads, fill with mode
-df_clean['Social_Media_Influence'].fillna(df_clean['Social_Media_Influence'].mode()[0], inplace=True)
-df_clean['Engagement_with_Ads'].fillna(df_clean['Engagement_with_Ads'].mode()[0], inplace=True)
+# Xử lý giá trị thiếu
+# Với Social_Media_Influence và Engagement_with_Ads, điền bằng mode (giá trị xuất hiện nhiều nhất)
+df_sach['Social_Media_Influence'].fillna(df_sach['Social_Media_Influence'].mode()[0], inplace=True)
+df_sach['Engagement_with_Ads'].fillna(df_sach['Engagement_with_Ads'].mode()[0], inplace=True)
 
-# Remove duplicates if any
-initial_rows = len(df_clean)
-df_clean.drop_duplicates(inplace=True)
-print(f"\nRemoved {initial_rows - len(df_clean)} duplicate rows")
+# Xóa bản ghi trùng lặp nếu có
+so_hang_ban_dau = len(df_sach)
+df_sach.drop_duplicates(inplace=True)
+print(f"\nĐã xóa {so_hang_ban_dau - len(df_sach)} dòng trùng lặp")
 
-# Validate data types
-print(f"\nCleaned data shape: {df_clean.shape}")
-print(f"Missing values after cleaning: {df_clean.isnull().sum().sum()}")
-print("✓ Data cleaning completed successfully!")
+# Kiểm tra lại kiểu dữ liệu
+print(f"\nKích thước dữ liệu sau làm sạch: {df_sach.shape}")
+print(f"Tổng số giá trị thiếu sau làm sạch: {df_sach.isnull().sum().sum()}")
+print("✓ Làm sạch dữ liệu thành công!")
 
-# ================== 2. EXPLORATORY DATA ANALYSIS ==================
+# ================== 2. PHÂN TÍCH THĂM DÒ DỮ LIỆU ==================
 print("\n" + "="*60)
-print("2. EXPLORATORY DATA ANALYSIS")
+print("2. PHÂN TÍCH THĂM DÒ DỮ LIỆU")
 print("="*60)
 
-print(f"\nBasic Statistics:")
-print(f"  - Average Purchase Amount: ${df_clean['Purchase_Amount'].mean():.2f}")
-print(f"  - Median Purchase Amount: ${df_clean['Purchase_Amount'].median():.2f}")
-print(f"  - Min Purchase Amount: ${df_clean['Purchase_Amount'].min():.2f}")
-print(f"  - Max Purchase Amount: ${df_clean['Purchase_Amount'].max():.2f}")
-print(f"\n  - Average Customer Age: {df_clean['Age'].mean():.1f} years")
-print(f"  - Average Customer Satisfaction: {df_clean['Customer_Satisfaction'].mean():.2f}/10")
+print(f"\nThống kê cơ bản:")
+print(f"  - Giá trị mua hàng trung bình: ${df_sach['Purchase_Amount'].mean():.2f}")
+print(f"  - Giá trị mua hàng trung vị: ${df_sach['Purchase_Amount'].median():.2f}")
+print(f"  - Giá trị mua hàng nhỏ nhất: ${df_sach['Purchase_Amount'].min():.2f}")
+print(f"  - Giá trị mua hàng lớn nhất: ${df_sach['Purchase_Amount'].max():.2f}")
+print(f"\n  - Độ tuổi trung bình của khách hàng: {df_sach['Age'].mean():.1f} tuổi")
+print(f"  - Mức độ hài lòng trung bình: {df_sach['Customer_Satisfaction'].mean():.2f}/10")
 
-print(f"\nTop Purchase Categories:")
-print(df_clean['Purchase_Category'].value_counts().head(10))
+print(f"\nCác danh mục sản phẩm hàng đầu:")
+print(df_sach['Purchase_Category'].value_counts().head(10))
 
-print(f"\nIncome Level Distribution:")
-print(df_clean['Income_Level'].value_counts())
+print(f"\nPhân bố mức thu nhập:")
+print(df_sach['Income_Level'].value_counts())
 
-# ================== 3. PRODUCTS FREQUENTLY BOUGHT TOGETHER ==================
+# ================== 3. CÁC SẢN PHẨM THƯỜNG ĐƯỢC MUA CÙNG NHAU ==================
 print("\n" + "="*60)
-print("3. MARKET BASKET ANALYSIS - PRODUCTS BOUGHT TOGETHER")
+print("3. PHÂN TÍCH GIỎ HÀNG - CÁC SẢN PHẨM ĐƯỢC MUA CÙNG NHAU")
 print("="*60)
 
-# Group by customer to find what products each customer bought
-customer_products = df_clean.groupby('Customer_ID')['Purchase_Category'].apply(list).values
+# Nhóm theo khách hàng để tìm ra các sản phẩm mỗi khách đã mua
+san_pham_cua_khach = df_sach.groupby('Customer_ID')['Purchase_Category'].apply(list).values
 
-# Find product pairs
-product_pairs = []
-product_counts = Counter()
+# Tìm các cặp sản phẩm
+cap_san_pham = []
+dem_san_pham = Counter()
 
-for products in customer_products:
-    unique_products = list(set(products))
-    product_counts.update(unique_products)
-    if len(unique_products) > 1:
-        pairs = list(combinations(sorted(unique_products), 2))
-        product_pairs.extend(pairs)
+for san_phams in san_pham_cua_khach:
+    cac_san_pham_duy_nhat = list(set(san_phams))
+    dem_san_pham.update(cac_san_pham_duy_nhat)
+    if len(cac_san_pham_duy_nhat) > 1:
+        cap = list(combinations(sorted(cac_san_pham_duy_nhat), 2))
+        cap_san_pham.extend(cap)
 
-# Count pair frequencies
-pair_counts = Counter(product_pairs)
+# Đếm tần suất các cặp
+dem_cap = Counter(cap_san_pham)
 
-print(f"\nTop 15 Product Combinations Bought Together:")
-for idx, (pair, count) in enumerate(pair_counts.most_common(15), 1):
-    product1, product2 = pair
-    print(f"  {idx}. {product1} + {product2}: {count} times")
+print(f"\n15 tổ hợp sản phẩm hàng đầu được mua cùng nhau:")
+for idx, (cap, so_lan) in enumerate(dem_cap.most_common(15), 1):
+    sp1, sp2 = cap
+    print(f"  {idx}. {sp1} + {sp2}: {so_lan} lần")
 
-# Top individual products
-print(f"\nTop 10 Most Purchased Categories:")
-for idx, (product, count) in enumerate(product_counts.most_common(10), 1):
-    percentage = (count / sum(product_counts.values())) * 100
-    print(f"  {idx}. {product}: {count} purchases ({percentage:.1f}%)")
+# Các sản phẩm riêng lẻ hàng đầu
+print(f"\n10 danh mục được mua nhiều nhất:")
+for idx, (san_pham, so_lan) in enumerate(dem_san_pham.most_common(10), 1):
+    ty_le = (so_lan / sum(dem_san_pham.values())) * 100
+    print(f"  {idx}. {san_pham}: {so_lan} lượt mua ({ty_le:.1f}%)")
 
-# ================== 4. CUSTOMER SEGMENTATION & SPENDING ANALYSIS ==================
+# ================== 4. PHÂN KHÚC KHÁCH HÀNG & PHÂN TÍCH CHI TIÊU ==================
 print("\n" + "="*60)
-print("4. CUSTOMER SEGMENTATION & SPENDING ANALYSIS")
+print("4. PHÂN KHÚC KHÁCH HÀNG & PHÂN TÍCH CHI TIÊU")
 print("="*60)
 
-# Prepare features for segmentation
-segmentation_features = ['Age', 'Purchase_Amount', 'Frequency_of_Purchase', 
-                         'Customer_Satisfaction', 'Brand_Loyalty']
+# Chuẩn bị các đặc trưng cho phân khúc
+cac_dac_trung_phan_khuc = ['Age', 'Purchase_Amount', 'Frequency_of_Purchase', 
+                           'Customer_Satisfaction', 'Brand_Loyalty']
 
-X_segment = df_clean[segmentation_features].copy()
-scaler = StandardScaler()
-X_segment_scaled = scaler.fit_transform(X_segment)
+X_phan_khuc = df_sach[cac_dac_trung_phan_khuc].copy()
+bo_chuan_hoa = StandardScaler()
+X_phan_khuc_chuan_hoa = bo_chuan_hoa.fit_transform(X_phan_khuc)
 
-# K-means clustering (4 segments)
-n_clusters = 4
-kmeans = KMeans(n_clusters=n_clusters, random_state=42, n_init=10)
-df_clean['Customer_Segment'] = kmeans.fit_predict(X_segment_scaled)
+# Phân cụm K-means (4 phân khúc)
+so_cum = 4
+kmeans = KMeans(n_clusters=so_cum, random_state=42, n_init=10)
+df_sach['Customer_Segment'] = kmeans.fit_predict(X_phan_khuc_chuan_hoa)
 
-# Analyze segments
-print(f"\nCustomer Segments (n={n_clusters}):")
-for segment in range(n_clusters):
-    segment_data = df_clean[df_clean['Customer_Segment'] == segment]
-    print(f"\n  Segment {segment} ({len(segment_data)} customers):")
-    print(f"    - Avg Age: {segment_data['Age'].mean():.1f}")
-    print(f"    - Avg Spending: ${segment_data['Purchase_Amount'].mean():.2f}")
-    print(f"    - Avg Purchase Frequency: {segment_data['Frequency_of_Purchase'].mean():.1f}")
-    print(f"    - Avg Satisfaction: {segment_data['Customer_Satisfaction'].mean():.2f}/10")
-    print(f"    - Avg Brand Loyalty: {segment_data['Brand_Loyalty'].mean():.2f}")
+# Phân tích các phân khúc
+print(f"\nCác phân khúc khách hàng (n={so_cum}):")
+for phan_khuc in range(so_cum):
+    du_lieu_phan_khuc = df_sach[df_sach['Customer_Segment'] == phan_khuc]
+    print(f"\n  Phân khúc {phan_khuc} ({len(du_lieu_phan_khuc)} khách hàng):")
+    print(f"    - Độ tuổi TB: {du_lieu_phan_khuc['Age'].mean():.1f}")
+    print(f"    - Chi tiêu TB: ${du_lieu_phan_khuc['Purchase_Amount'].mean():.2f}")
+    print(f"    - Tần suất mua TB: {du_lieu_phan_khuc['Frequency_of_Purchase'].mean():.1f}")
+    print(f"    - Mức hài lòng TB: {du_lieu_phan_khuc['Customer_Satisfaction'].mean():.2f}/10")
+    print(f"    - Lòng trung thành TB: {du_lieu_phan_khuc['Brand_Loyalty'].mean():.2f}")
 
-# Spending by Income Level
-print(f"\nSpending Analysis by Income Level:")
-income_spending = df_clean.groupby('Income_Level').agg({
+# Phân tích chi tiêu theo mức thu nhập
+print(f"\nPhân tích chi tiêu theo mức thu nhập:")
+chi_tieu_theo_thu_nhap = df_sach.groupby('Income_Level').agg({
     'Purchase_Amount': ['mean', 'median', 'sum', 'count']
 }).round(2)
-income_spending.columns = ['Mean', 'Median', 'Total', 'Count']
-print(income_spending.sort_values('Mean', ascending=False))
+chi_tieu_theo_thu_nhap.columns = ['Trung_bình', 'Trung_vị', 'Tổng', 'Số_lượng']
+print(chi_tieu_theo_thu_nhap.sort_values('Trung_bình', ascending=False))
 
-# Spending by Gender
-print(f"\nSpending Analysis by Gender:")
-gender_spending = df_clean.groupby('Gender').agg({
+# Phân tích chi tiêu theo giới tính
+print(f"\nPhân tích chi tiêu theo giới tính:")
+chi_tieu_theo_gioi_tinh = df_sach.groupby('Gender').agg({
     'Purchase_Amount': ['mean', 'median', 'sum', 'count'],
     'Customer_Satisfaction': 'mean'
 }).round(2)
-gender_spending.columns = ['Avg_Amount', 'Median_Amount', 'Total_Amount', 'Count', 'Satisfaction']
-print(gender_spending)
+chi_tieu_theo_gioi_tinh.columns = ['Trung_bình', 'Trung_vị', 'Tổng', 'Số_lượng', 'Hài_lòng']
+print(chi_tieu_theo_gioi_tinh)
 
-# ================== 5. DATA VISUALIZATION ==================
+# ================== 5. TRỰC QUAN HÓA DỮ LIỆU ==================
 print("\n" + "="*60)
-print("5. CREATING VISUALIZATIONS")
+print("5. TẠO CÁC BIỂU ĐỒ TRỰC QUAN")
 print("="*60)
 
-# Set style
+# Thiết lập style
 sns.set_style("whitegrid")
 plt.rcParams['figure.figsize'] = (15, 12)
 
 fig, axes = plt.subplots(3, 3, figsize=(18, 15))
-fig.suptitle('E-Commerce Consumer Behavior Analysis', fontsize=20, fontweight='bold', y=0.995)
+fig.suptitle('Phân Tích Hành Vi Người Tiêu Dùng Thương Mại Điện Tử', fontsize=20, fontweight='bold', y=0.995)
 
-# 1. Purchase Amount Distribution
-axes[0, 0].hist(df_clean['Purchase_Amount'], bins=30, color='steelblue', edgecolor='black', alpha=0.7)
-axes[0, 0].set_xlabel('Purchase Amount ($)')
-axes[0, 0].set_ylabel('Frequency')
-axes[0, 0].set_title('Distribution of Purchase Amounts')
-axes[0, 0].axvline(df_clean['Purchase_Amount'].mean(), color='red', linestyle='--', label=f'Mean: ${df_clean["Purchase_Amount"].mean():.2f}')
+# 1. Phân bố giá trị đơn hàng
+axes[0, 0].hist(df_sach['Purchase_Amount'], bins=30, color='steelblue', edgecolor='black', alpha=0.7)
+axes[0, 0].set_xlabel('Giá trị đơn hàng ($)')
+axes[0, 0].set_ylabel('Tần suất')
+axes[0, 0].set_title('Phân bố giá trị đơn hàng')
+axes[0, 0].axvline(df_sach['Purchase_Amount'].mean(), color='red', linestyle='--', label=f'TB: ${df_sach["Purchase_Amount"].mean():.2f}')
 axes[0, 0].legend()
 
-# 2. Top 10 Purchase Categories
-top_categories = df_clean['Purchase_Category'].value_counts().head(10)
-axes[0, 1].barh(range(len(top_categories)), top_categories.values, color='coral')
-axes[0, 1].set_yticks(range(len(top_categories)))
-axes[0, 1].set_yticklabels(top_categories.index)
-axes[0, 1].set_xlabel('Number of Purchases')
-axes[0, 1].set_title('Top 10 Product Categories')
+# 2. 10 danh mục sản phẩm hàng đầu
+top_danh_muc = df_sach['Purchase_Category'].value_counts().head(10)
+axes[0, 1].barh(range(len(top_danh_muc)), top_danh_muc.values, color='coral')
+axes[0, 1].set_yticks(range(len(top_danh_muc)))
+axes[0, 1].set_yticklabels(top_danh_muc.index)
+axes[0, 1].set_xlabel('Số lượt mua')
+axes[0, 1].set_title('10 danh mục sản phẩm hàng đầu')
 axes[0, 1].invert_yaxis()
 
-# 3. Spending by Income Level
-income_order = ['Low', 'Medium', 'High']
-income_data = df_clean[df_clean['Income_Level'].isin(income_order)].copy()
-sns.boxplot(x='Income_Level', y='Purchase_Amount', data=income_data, order=income_order, ax=axes[0, 2], palette='Set2')
-axes[0, 2].set_ylabel('Purchase Amount ($)')
-axes[0, 2].set_xlabel('Income Level')
-axes[0, 2].set_title('Spending by Income Level')
+# 3. Chi tiêu theo mức thu nhập
+thu_tu_thu_nhap = ['Low', 'Medium', 'High']
+du_lieu_thu_nhap = df_sach[df_sach['Income_Level'].isin(thu_tu_thu_nhap)].copy()
+sns.boxplot(x='Income_Level', y='Purchase_Amount', data=du_lieu_thu_nhap, order=thu_tu_thu_nhap, ax=axes[0, 2], palette='Set2')
+axes[0, 2].set_ylabel('Giá trị đơn hàng ($)')
+axes[0, 2].set_xlabel('Mức thu nhập')
+axes[0, 2].set_title('Chi tiêu theo mức thu nhập')
 
-# 4. Customer Age Distribution
-axes[1, 0].hist(df_clean['Age'], bins=20, color='lightgreen', edgecolor='black', alpha=0.7)
-axes[1, 0].set_xlabel('Age (years)')
-axes[1, 0].set_ylabel('Frequency')
-axes[1, 0].set_title('Customer Age Distribution')
+# 4. Phân bố độ tuổi khách hàng
+axes[1, 0].hist(df_sach['Age'], bins=20, color='lightgreen', edgecolor='black', alpha=0.7)
+axes[1, 0].set_xlabel('Tuổi')
+axes[1, 0].set_ylabel('Tần suất')
+axes[1, 0].set_title('Phân bố độ tuổi khách hàng')
 
-# 5. Customer Satisfaction vs Purchase Amount
-scatter = axes[1, 1].scatter(df_clean['Purchase_Amount'], df_clean['Customer_Satisfaction'], 
-                             c=df_clean['Age'], cmap='viridis', alpha=0.6, s=50)
-axes[1, 1].set_xlabel('Purchase Amount ($)')
-axes[1, 1].set_ylabel('Customer Satisfaction')
-axes[1, 1].set_title('Satisfaction vs Spending (colored by Age)')
-cbar = plt.colorbar(scatter, ax=axes[1, 1])
-cbar.set_label('Age')
+# 5. Mức độ hài lòng so với giá trị đơn hàng
+bubble = axes[1, 1].scatter(df_sach['Purchase_Amount'], df_sach['Customer_Satisfaction'], 
+                            c=df_sach['Age'], cmap='viridis', alpha=0.6, s=50)
+axes[1, 1].set_xlabel('Giá trị đơn hàng ($)')
+axes[1, 1].set_ylabel('Mức độ hài lòng')
+axes[1, 1].set_title('Hài lòng vs Chi tiêu (tô màu theo độ tuổi)')
+thanh_mau = plt.colorbar(bubble, ax=axes[1, 1])
+thanh_mau.set_label('Tuổi')
 
-# 6. Spending by Gender
-gender_avg = df_clean.groupby('Gender')['Purchase_Amount'].mean()
-colors = ['#FF69B4', '#4169E1']
-axes[1, 2].bar(gender_avg.index, gender_avg.values, color=colors, alpha=0.7, edgecolor='black')
-axes[1, 2].set_ylabel('Average Purchase Amount ($)')
-axes[1, 2].set_title('Average Spending by Gender')
-for i, v in enumerate(gender_avg.values):
+# 6. Chi tiêu theo giới tính
+chi_tieu_tb_theo_gioi = df_sach.groupby('Gender')['Purchase_Amount'].mean()
+mau_sac = ['#FF69B4', '#4169E1']
+axes[1, 2].bar(chi_tieu_tb_theo_gioi.index, chi_tieu_tb_theo_gioi.values, color=mau_sac, alpha=0.7, edgecolor='black')
+axes[1, 2].set_ylabel('Giá trị đơn hàng trung bình ($)')
+axes[1, 2].set_title('Chi tiêu trung bình theo giới tính')
+for i, v in enumerate(chi_tieu_tb_theo_gioi.values):
     axes[1, 2].text(i, v + 5, f'${v:.2f}', ha='center', fontweight='bold')
 
-# 7. Purchase Frequency Distribution
-axes[2, 0].hist(df_clean['Frequency_of_Purchase'], bins=15, color='purple', edgecolor='black', alpha=0.7)
-axes[2, 0].set_xlabel('Purchase Frequency')
-axes[2, 0].set_ylabel('Number of Customers')
-axes[2, 0].set_title('Customer Purchase Frequency Distribution')
+# 7. Phân bố tần suất mua hàng
+axes[2, 0].hist(df_sach['Frequency_of_Purchase'], bins=15, color='purple', edgecolor='black', alpha=0.7)
+axes[2, 0].set_xlabel('Tần suất mua hàng')
+axes[2, 0].set_ylabel('Số lượng khách hàng')
+axes[2, 0].set_title('Phân bố tần suất mua hàng')
 
-# 8. Customer Segments (3D representation on 2D)
-segment_spending = df_clean.groupby('Customer_Segment')['Purchase_Amount'].mean()
-segment_size = df_clean['Customer_Segment'].value_counts().sort_index()
-colors_segment = ['#FF6B6B', '#4ECDC4', '#45B7D1', '#FFA07A']
-axes[2, 1].scatter(segment_size.values, segment_spending.values, 
-                   s=[x*10 for x in segment_size.values], 
-                   c=colors_segment, alpha=0.6, edgecolors='black', linewidth=2)
-for i, segment in enumerate(range(n_clusters)):
-    axes[2, 1].annotate(f'Segment {segment}', 
-                       (segment_size[segment], segment_spending[segment]),
+# 8. Tổng quan các phân khúc khách hàng (biểu diễn 3D trên 2D)
+chi_tieu_tb_phan_khuc = df_sach.groupby('Customer_Segment')['Purchase_Amount'].mean()
+so_luong_phan_khuc = df_sach['Customer_Segment'].value_counts().sort_index()
+mau_phan_khuc = ['#FF6B6B', '#4ECDC4', '#45B7D1', '#FFA07A']
+axes[2, 1].scatter(so_luong_phan_khuc.values, chi_tieu_tb_phan_khuc.values, 
+                   s=[x*10 for x in so_luong_phan_khuc.values], 
+                   c=mau_phan_khuc, alpha=0.6, edgecolors='black', linewidth=2)
+for i, pk in enumerate(range(so_cum)):
+    axes[2, 1].annotate(f'Phân khúc {pk}', 
+                       (so_luong_phan_khuc[pk], chi_tieu_tb_phan_khuc[pk]),
                        xytext=(5, 5), textcoords='offset points', fontweight='bold')
-axes[2, 1].set_xlabel('Number of Customers')
-axes[2, 1].set_ylabel('Average Spending ($)')
-axes[2, 1].set_title('Customer Segments Overview')
+axes[2, 1].set_xlabel('Số lượng khách hàng')
+axes[2, 1].set_ylabel('Chi tiêu trung bình ($)')
+axes[2, 1].set_title('Tổng quan các phân khúc khách hàng')
 
-# 9. Payment Methods
-payment_counts = df_clean['Payment_Method'].value_counts()
-axes[2, 2].pie(payment_counts.values, labels=payment_counts.index, autopct='%1.1f%%', startangle=90)
-axes[2, 2].set_title('Payment Method Distribution')
+# 9. Phương thức thanh toán
+so_luong_thanh_toan = df_sach['Payment_Method'].value_counts()
+axes[2, 2].pie(so_luong_thanh_toan.values, labels=so_luong_thanh_toan.index, autopct='%1.1f%%', startangle=90)
+axes[2, 2].set_title('Phân bố phương thức thanh toán')
 
 plt.tight_layout()
-plt.savefig('consumer_behavior_analysis.png', dpi=300, bbox_inches='tight')
-print("✓ Visualization saved as 'consumer_behavior_analysis.png'")
+plt.savefig('phan_tich_hanh_vi_nguoi_tieu_dung.png', dpi=300, bbox_inches='tight')
+print("✓ Đã lưu biểu đồ trực quan với tên 'phan_tich_hanh_vi_nguoi_tieu_dung.png'")
 plt.close()
 
-# ================== 6. PREDICTIVE MODEL - SPENDING PREDICTION ==================
+# ================== 6. MÔ HÌNH DỰ ĐOÁN - DỰ ĐOÁN CHI TIÊU ==================
 print("\n" + "="*60)
-print("6. PREDICTIVE MODEL - CUSTOMER SPENDING PREDICTION")
+print("6. MÔ HÌNH DỰ ĐOÁN - DỰ ĐOÁN CHI TIÊU CỦA KHÁCH HÀNG")
 print("="*60)
 
-# Prepare features for prediction
-# Encode categorical variables
-le_dict = {}
-categorical_features = ['Gender', 'Income_Level', 'Marital_Status', 'Education_Level', 
-                       'Occupation', 'Location', 'Purchase_Channel', 'Social_Media_Influence',
-                       'Discount_Sensitivity', 'Device_Used_for_Shopping', 'Payment_Method',
-                       'Time_of_Purchase', 'Purchase_Intent', 'Shipping_Preference']
+# Chuẩn bị các đặc trưng cho dự đoán
+# Mã hóa các biến phân loại
+tu_dien_ma_hoa = {}
+cac_dac_trung_phân_loai = ['Gender', 'Income_Level', 'Marital_Status', 'Education_Level', 
+                          'Occupation', 'Location', 'Purchase_Channel', 'Social_Media_Influence',
+                          'Discount_Sensitivity', 'Device_Used_for_Shopping', 'Payment_Method',
+                          'Time_of_Purchase', 'Purchase_Intent', 'Shipping_Preference']
 
-df_model = df_clean.copy()
+df_mo_hinh = df_sach.copy()
 
-for feature in categorical_features:
-    le = LabelEncoder()
-    df_model[feature] = le.fit_transform(df_model[feature])
-    le_dict[feature] = le
+for dac_trung in cac_dac_trung_phân_loai:
+    ma_hoa = LabelEncoder()
+    df_mo_hinh[dac_trung] = ma_hoa.fit_transform(df_mo_hinh[dac_trung])
+    tu_dien_ma_hoa[dac_trung] = ma_hoa
 
-# Select features for the model
-feature_columns = ['Age', 'Frequency_of_Purchase', 'Brand_Loyalty', 'Product_Rating',
-                  'Time_Spent_on_Product_Research(hours)', 'Return_Rate',
-                  'Customer_Satisfaction', 'Time_to_Decision'] + categorical_features
+# Chọn các đặc trưng cho mô hình
+cac_cot_dac_trung = ['Age', 'Frequency_of_Purchase', 'Brand_Loyalty', 'Product_Rating',
+                     'Time_Spent_on_Product_Research(hours)', 'Return_Rate',
+                     'Customer_Satisfaction', 'Time_to_Decision'] + cac_dac_trung_phân_loai
 
-X = df_model[feature_columns]
-y = df_model['Purchase_Amount']
+X = df_mo_hinh[cac_cot_dac_trung]
+y = df_mo_hinh['Purchase_Amount']
 
-# Split data
+# Chia dữ liệu
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 
-# Train model
-print("\nTraining Random Forest model...")
-model = RandomForestRegressor(n_estimators=100, random_state=42, n_jobs=-1, max_depth=15)
-model.fit(X_train, y_train)
+# Huấn luyện mô hình
+print("\nĐang huấn luyện mô hình Random Forest...")
+mo_hinh = RandomForestRegressor(n_estimators=100, random_state=42, n_jobs=-1, max_depth=15)
+mo_hinh.fit(X_train, y_train)
 
-# Predictions
-y_pred_train = model.predict(X_train)
-y_pred_test = model.predict(X_test)
+# Dự đoán
+y_pred_train = mo_hinh.predict(X_train)
+y_pred_test = mo_hinh.predict(X_test)
 
-# Evaluation Metrics
+# Các chỉ số đánh giá
 train_rmse = np.sqrt(mean_squared_error(y_train, y_pred_train))
 test_rmse = np.sqrt(mean_squared_error(y_test, y_pred_test))
 train_mae = mean_absolute_error(y_train, y_pred_train)
@@ -280,99 +280,99 @@ test_mae = mean_absolute_error(y_test, y_pred_test)
 train_r2 = r2_score(y_train, y_pred_train)
 test_r2 = r2_score(y_test, y_pred_test)
 
-print(f"\nModel Performance:")
-print(f"  Train RMSE: ${train_rmse:.2f}")
-print(f"  Test RMSE: ${test_rmse:.2f}")
-print(f"  Train MAE: ${train_mae:.2f}")
-print(f"  Test MAE: ${test_mae:.2f}")
-print(f"  Train R²: {train_r2:.4f}")
-print(f"  Test R²: {test_r2:.4f}")
+print(f"\nHiệu suất mô hình:")
+print(f"  RMSE trên tập huấn luyện: ${train_rmse:.2f}")
+print(f"  RMSE trên tập kiểm tra: ${test_rmse:.2f}")
+print(f"  MAE trên tập huấn luyện: ${train_mae:.2f}")
+print(f"  MAE trên tập kiểm tra: ${test_mae:.2f}")
+print(f"  R² trên tập huấn luyện: {train_r2:.4f}")
+print(f"  R² trên tập kiểm tra: {test_r2:.4f}")
 
-# Feature Importance
-feature_importance = pd.DataFrame({
-    'Feature': feature_columns,
-    'Importance': model.feature_importances_
-}).sort_values('Importance', ascending=False)
+# Mức độ quan trọng của các đặc trưng
+muc_do_quan_trong = pd.DataFrame({
+    'Đặc_trưng': cac_cot_dac_trung,
+    'Độ_quan_trọng': mo_hinh.feature_importances_
+}).sort_values('Độ_quan_trọng', ascending=False)
 
-print(f"\nTop 15 Most Important Features:")
-for idx, row in feature_importance.head(15).iterrows():
-    print(f"  {row['Feature']}: {row['Importance']:.4f}")
+print(f"\n15 đặc trưng quan trọng nhất:")
+for idx, dong in muc_do_quan_trong.head(15).iterrows():
+    print(f"  {dong['Đặc_trưng']}: {dong['Độ_quan_trọng']:.4f}")
 
-# ================== 7. PREDICTION EXAMPLES ==================
+# ================== 7. VÍ DỤ DỰ ĐOÁN ==================
 print("\n" + "="*60)
-print("7. PREDICTION EXAMPLES - SAMPLE CUSTOMER SPENDING")
+print("7. VÍ DỤ DỰ ĐOÁN - CHI TIÊU CỦA KHÁCH HÀNG MẪU")
 print("="*60)
 
-# Create sample predictions
-sample_indices = np.random.choice(X_test.index, 5, replace=False)
-sample_X = X_test.loc[sample_indices]
-sample_y_actual = y_test.loc[sample_indices]
-sample_y_pred = model.predict(sample_X)
+# Tạo các dự đoán mẫu
+cac_chi_mau = np.random.choice(X_test.index, 5, replace=False)
+X_mau = X_test.loc[cac_chi_mau]
+y_thuc_mau = y_test.loc[cac_chi_mau]
+y_du_doan_mau = mo_hinh.predict(X_mau)
 
-print("\nSample Predictions (vs Actual Spending):")
-for i, (idx, pred, actual) in enumerate(zip(sample_indices, sample_y_pred, sample_y_actual), 1):
-    error = abs(pred - actual) / actual * 100
-    print(f"  Customer {i}:")
-    print(f"    Predicted Spending: ${pred:.2f}")
-    print(f"    Actual Spending: ${actual:.2f}")
-    print(f"    Error: {error:.1f}%\n")
+print("\nCác dự đoán mẫu (so với chi tiêu thực tế):")
+for i, (idx, du_doan, thuc_te) in enumerate(zip(cac_chi_mau, y_du_doan_mau, y_thuc_mau), 1):
+    sai_so = abs(du_doan - thuc_te) / thuc_te * 100
+    print(f"  Khách hàng {i}:")
+    print(f"    Chi tiêu dự đoán: ${du_doan:.2f}")
+    print(f"    Chi tiêu thực tế: ${thuc_te:.2f}")
+    print(f"    Sai số: {sai_so:.1f}%\n")
 
-# ================== 8. SAVE RESULTS ==================
+# ================== 8. LƯU KẾT QUẢ ==================
 print("="*60)
-print("8. SAVING RESULTS")
+print("8. LƯU KẾT QUẢ")
 print("="*60)
 
-# Save cleaned data
-df_clean.to_csv('data_cleaned.csv', index=False)
-print("✓ Cleaned data saved as 'data_cleaned.csv'")
+# Lưu dữ liệu đã làm sạch
+df_sach.to_csv('du_lieu_da_sach.csv', index=False)
+print("✓ Đã lưu dữ liệu đã làm sạch với tên 'du_lieu_da_sach.csv'")
 
-# Save customer segments
-segments_summary = df_clean.groupby('Customer_Segment').agg({
+# Lưu phân tích phân khúc khách hàng
+tom_tat_phan_khuc = df_sach.groupby('Customer_Segment').agg({
     'Purchase_Amount': ['mean', 'median', 'count'],
     'Age': 'mean',
     'Customer_Satisfaction': 'mean',
     'Frequency_of_Purchase': 'mean'
 }).round(2)
-segments_summary.to_csv('customer_segments_analysis.csv')
-print("✓ Customer segments analysis saved as 'customer_segments_analysis.csv'")
+tom_tat_phan_khuc.to_csv('phan_tich_phan_khuc_khach_hang.csv')
+print("✓ Đã lưu phân tích phân khúc khách hàng với tên 'phan_tich_phan_khuc_khach_hang.csv'")
 
-# Save top product combinations
-pairs_df = pd.DataFrame(list(pair_counts.most_common(50)), 
-                        columns=['Product_Combination', 'Count'])
-pairs_df['Pair_1'] = pairs_df['Product_Combination'].str[0]
-pairs_df['Pair_2'] = pairs_df['Product_Combination'].str[1]
-pairs_df = pairs_df[['Pair_1', 'Pair_2', 'Count']]
-pairs_df.to_csv('product_combinations.csv', index=False)
-print("✓ Product combinations saved as 'product_combinations.csv'")
+# Lưu các tổ hợp sản phẩm hàng đầu
+df_cap = pd.DataFrame(list(dem_cap.most_common(50)), 
+                      columns=['Tổ_hợp_sản_phẩm', 'Số_lần'])
+df_cap['Sản_phẩm_1'] = df_cap['Tổ_hợp_sản_phẩm'].str[0]
+df_cap['Sản_phẩm_2'] = df_cap['Tổ_hợp_sản_phẩm'].str[1]
+df_cap = df_cap[['Sản_phẩm_1', 'Sản_phẩm_2', 'Số_lần']]
+df_cap.to_csv('cac_cap_san_pham.csv', index=False)
+print("✓ Đã lưu các cặp sản phẩm với tên 'cac_cap_san_pham.csv'")
 
-# Save feature importance
-feature_importance.to_csv('feature_importance.csv', index=False)
-print("✓ Feature importance saved as 'feature_importance.csv'")
+# Lưu mức độ quan trọng của các đặc trưng
+muc_do_quan_trong.to_csv('muc_do_quan_trong_dac_trung.csv', index=False)
+print("✓ Đã lưu mức độ quan trọng của đặc trưng với tên 'muc_do_quan_trong_dac_trung.csv'")
 
-# Save model predictions
-prediction_results = pd.DataFrame({
-    'Actual_Spending': y_test.values,
-    'Predicted_Spending': y_pred_test,
-    'Prediction_Error': np.abs(y_test.values - y_pred_test),
-    'Error_Percentage': (np.abs(y_test.values - y_pred_test) / y_test.values * 100)
+# Lưu kết quả dự đoán
+ket_qua_du_doan = pd.DataFrame({
+    'Chi_tieu_thuc_te': y_test.values,
+    'Chi_tieu_du_doan': y_pred_test,
+    'Sai_so_tuyet_doi': np.abs(y_test.values - y_pred_test),
+    'Sai_so_phan_tram': (np.abs(y_test.values - y_pred_test) / y_test.values * 100)
 })
-prediction_results.to_csv('model_predictions.csv', index=False)
-print("✓ Model predictions saved as 'model_predictions.csv'")
+ket_qua_du_doan.to_csv('du_doan_cua_mo_hinh.csv', index=False)
+print("✓ Đã lưu dự đoán của mô hình với tên 'du_doan_cua_mo_hinh.csv'")
 
-# ================== SUMMARY ==================
+# ================== TỔNG KẾT ==================
 print("\n" + "="*60)
-print("ANALYSIS COMPLETE!")
+print("PHÂN TÍCH HOÀN TẤT!")
 print("="*60)
-print(f"\n✓ Generated outputs:")
-print(f"  1. consumer_behavior_analysis.png - 9-panel visualization")
-print(f"  2. data_cleaned.csv - Cleaned transaction data")
-print(f"  3. customer_segments_analysis.csv - Customer segmentation insights")
-print(f"  4. product_combinations.csv - Top product pairs")
-print(f"  5. feature_importance.csv - Predictive model feature importance")
-print(f"  6. model_predictions.csv - Customer spending predictions")
-print(f"\n✓ Analysis Summary:")
-print(f"  - Analyzed {len(df_clean)} transactions")
-print(f"  - {df_clean['Purchase_Category'].nunique()} product categories")
-print(f"  - {n_clusters} customer segments identified")
-print(f"  - Model achieved {test_r2:.2%} accuracy on test set")
+print(f"\n✓ Các đầu ra đã tạo:")
+print(f"  1. phan_tich_hanh_vi_nguoi_tieu_dung.png - Biểu đồ trực quan 9 bảng")
+print(f"  2. du_lieu_da_sach.csv - Dữ liệu giao dịch đã làm sạch")
+print(f"  3. phan_tich_phan_khuc_khach_hang.csv - Thông tin phân khúc khách hàng")
+print(f"  4. cac_cap_san_pham.csv - Các cặp sản phẩm hàng đầu")
+print(f"  5. muc_do_quan_trong_dac_trung.csv - Mức độ quan trọng của các đặc trưng")
+print(f"  6. du_doan_cua_mo_hinh.csv - Dự đoán chi tiêu khách hàng")
+print(f"\n✓ Tóm tắt phân tích:")
+print(f"  - Đã phân tích {len(df_sach)} giao dịch")
+print(f"  - {df_sach['Purchase_Category'].nunique()} danh mục sản phẩm")
+print(f"  - Đã xác định {so_cum} phân khúc khách hàng")
+print(f"  - Mô hình đạt độ chính xác {test_r2:.2%} trên tập kiểm tra")
 print("="*60)
