@@ -16,29 +16,29 @@ Dự án phân tích toàn diện này xem xét hành vi khách hàng thương m
 ## 📁 Cấu Trúc Dự Án
 BTL_CD3/
 ├── Main Scripts
-│ ├── BaiTap.py # Phân tích chính & huấn luyện mô hình
+│ ├── Main.py # Phân tích chính & huấn luyện mô hình
 │ ├── AnalysisAdvanced.py # Phân tích nâng cao & phân khúc
 │ ├── GenerateReport.py # Tạo báo cáo toàn diện
 │ └── ExecutionSummary.py # Tóm tắt phân tích
 │
 ├── Dữ Liệu (Đã làm sạch & Xử lý)
-│ ├── data_cleaned.csv                     # 1,000 giao dịch đã làm sạch
-│ ├── customer_segments_analysis.csv       # Phân khúc 4 cụm
-│ ├── product_combinations.csv             # Phân tích giỏ hàng (50 cặp)
-│ ├── customer_lifetime_value.csv          # Xếp hạng giá trị vòng đời
-│ ├── high_churn_risk_customers.csv        # 414 khách hàng có nguy cơ rời bỏ
-│ ├── model_predictions.csv                # 200+ dự đoán chi tiêu
-│ ├── feature_importance.csv               # Các đặc trưng quan trọng
-│ ├── channel_performance.csv              # Hiệu suất kênh bán hàng
-│ └── device_analysis.csv                  # Phân tích thiết bị sử dụng
+│ ├── du_lieu_da_sach.csv                     # 1,000 giao dịch đã làm sạch
+│ ├── phan_tich_phan_khuc_khach_hang.csv>      # Phân khúc 4 cụm
+│ ├── cac_cap_san_pham.csv           # Phân tích giỏ hàng (50 cặp)
+│ ├── gia_tri_vong_doi_khach_hang.csv          # Xếp hạng giá trị vòng đời
+│ ├── khach_hang_rui_ro_roi_bo_cao.csv>      # 414 khách hàng có nguy cơ rời bỏ
+│ ├── du_doan_cua_mo_hinh.csv                # 200+ dự đoán chi tiêu
+│ ├── muc_do_quan_trong_dac_trung.csv               # Các đặc trưng quan trọng
+│ ├── hieu_suat_kenh.csv              # Hiệu suất kênh bán hàng
+│ └── phan_tich_thiet_bi.csv                  # Phân tích thiết bị sử dụng
 │
 ├── Trực Quan Hóa (Độ phân giải cao)
-│ ├── consumer_behavior_analysis.png       # Bảng điều khiển 9 ô (300 DPI)
-│ └── advanced_analysis.png                # Phân tích nâng cao 9 ô (300 DPI)
+│ ├── phan_tich_hanh_vi_nguoi_tieu_dung.png      # Bảng điều khiển 9 ô (300 DPI)
+│ └── phan_tich_nang_cao.png              # Phân tích nâng cao 9 ô (300 DPI)
 │
 └── Báo Cáo
-├── COMPREHENSIVE_ANALYSIS_REPORT.txt      # Báo cáo chi tiết 500+ dòng
-└── ANALYSIS_SUMMARY.txt # Tóm tắt điều hành
+├── BAO_CAO_PHAN_TICH_TOAN_DIEN.txt    # Báo cáo chi tiết 500+ dòng
+└── TOM_TAT_PHAN_TICH.txt # Tóm tắt điều hành
 
 ---
 
@@ -47,7 +47,7 @@ BTL_CD3/
 ### 1. Chạy Tất Cả Các Phân Tích
 ```bash
 # Chạy phân tích chính (làm sạch dữ liệu, phân khúc, trực quan hóa, dự đoán)
-python BaiTap.py
+python Main.py
 
 # Chạy phân tích nâng cao
 python AnalysisAdvanced.py
@@ -67,17 +67,17 @@ python ExecutionSummary.py
 🎯 BẮT ĐẦU NHANH - 3 BƯỚC ĐỂ CÓ THÔNG TIN CHI TIẾT
 
 BƯỚC 1: Xem Tóm Tắt Điều Hành
-  → Mở file: COMPREHENSIVE_ANALYSIS_REPORT.txt
+  → Mở file: BAO_CAO_PHAN_TICH_TOAN_DIEN.txt
   → Đọc các thông tin chi tiết, khuyến nghị, phát hiện
   → Thời gian: 15-20 phút
 
 BƯỚC 2: Xem Trực Quan Hóa  
-  → Nhấp đúp vào: consumer_behavior_analysis.png
+  → Nhấp đúp vào: phan_tich_hanh_vi_nguoi_tieu_dung.png
   → Hiển thị: Tổng quan 9 ô về tất cả dữ liệu
   → Thời gian: 5 phút
 
 BƯỚC 3: Khám Phá Dữ Liệu
-  → Mở trong Excel: data_cleaned.csv (hoặc bất kỳ file .csv nào)
+  → Mở trong Excel: du_lieu_da_sach.csv (hoặc bất kỳ file .csv nào)
   → Đi sâu vào các phân khúc/khách hàng cụ thể
   → Thời gian: Tùy theo nhu cầu
 
