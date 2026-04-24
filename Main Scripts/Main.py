@@ -27,11 +27,11 @@ print(df.isnull().sum()[df.isnull().sum() > 0])
 # Copy data
 df_clean = df.copy()
 
-# ✅ FIX 1: Clean Purchase Amount
+# FIX 1: Clean Purchase Amount
 df_clean['Purchase_Amount'] = df_clean['Purchase_Amount'].astype(str).str.replace('$', '', regex=False)
 df_clean['Purchase_Amount'] = pd.to_numeric(df_clean['Purchase_Amount'], errors='coerce')
 
-# ✅ FIX 2: Fill toàn bộ missing values
+# FIX 2: Fill toàn bộ missing values
 import pandas as pd
 
 for col in df_clean.columns:
@@ -40,12 +40,12 @@ for col in df_clean.columns:
     else:
         df_clean[col].fillna(df_clean[col].mode()[0], inplace=True)
 
-# ✅ FIX 3: Remove duplicates
+# FIX 3: Remove duplicates
 initial_rows = len(df_clean)
 df_clean.drop_duplicates(inplace=True)
 print(f"\nRemoved {initial_rows - len(df_clean)} duplicate rows")
 
-# ✅ FIX 4: Tạo nhiều giao dịch cho 1 khách (QUAN TRỌNG)
+# FIX 4: Tạo nhiều giao dịch cho 1 khách (QUAN TRỌNG)
 df_clean['Customer_ID'] = np.random.randint(1, 200, size=len(df_clean))
 
 print(f"\nCleaned data shape: {df_clean.shape}")
