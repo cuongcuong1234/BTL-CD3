@@ -76,10 +76,17 @@ print(df_clean['Purchase_Category'].value_counts().head(10))
 print(f"\nPhân bố mức thu nhập:")
 print(df_clean['Income_Level'].value_counts())
 
-# ================== 3. PHÂN TÍCH GIỎ HÀNG (Market Basket Analysis) ==================
-print("\n" + "=" * 80)
+# ================== 3. PHÂN TÍCH SẢN PHẨM MUA CÙNG NHAU ==================
+print("\n" + "=" * 70)
 print("3. PHÂN TÍCH SẢN PHẨM MUA CÙNG NHAU")
-print("=" * 80)
+print("=" * 70)
+
+import os
+from collections import Counter
+from itertools import combinations
+
+# Tạo thư mục lưu biểu đồ
+os.makedirs("charts", exist_ok=True)
 
 customer_products = df_clean.groupby('Customer_ID')['Purchase_Category'].apply(list)
 
@@ -89,69 +96,108 @@ product_counts = Counter()
 for products in customer_products:
     unique_products = list(set(products))
     product_counts.update(unique_products)
-
     if len(unique_products) > 1:
         pairs = list(combinations(sorted(unique_products), 2))
         product_pairs.extend(pairs)
 
 pair_counts = Counter(product_pairs)
 
-print(f"\nTổng số cặp sản phẩm tìm thấy: {len(pair_counts)}")
+# Biểu đồ 1: Top 10 cặp sản phẩm
+if len(pair_counts) > 0:
+    top_pairs = pair_counts.most_common(10)
+    pairs_labels = [f"{a} + {b}" for (a, b), _ in top_pairs]
+    pairs_values = [count for _, count in top_pairs]
 
-if len(pair_counts) == 0:
-    print("❌ Không tìm thấy sự kết hợp sản phẩm nào!")
-else:
-    print("\nTop 10 sự kết hợp sản phẩm phổ biến nhất:")
-    for idx, (pair, count) in enumerate(pair_counts.most_common(10), 1):
-        print(f"  {idx}. {pair[0]} + {pair[1]} : {count} lần")
+    plt.figure(figsize=(8, 5))
+    sns.barplot(x=pairs_values, y=pairs_labels, palette="Blues_d")
+    plt.title('Top 10 cặp sản phẩm mua cùng nhau', fontsize=13, pad=15)
+    plt.xlabel('Số lần mua cùng')
+    plt.tight_layout()
+    plt.savefig('charts/top10_product_pairs.png', dpi=200, bbox_inches='tight')
+    plt.show()
 
-print("\nTop 10 danh mục được mua nhiều nhất:")
-for idx, (product, count) in enumerate(product_counts.most_common(10), 1):
-    percentage = (count / sum(product_counts.values())) * 100
-    print(f"  {idx}. {product}: {count} lần ({percentage:.1f}%)")
+# Biểu đồ 2: Top 10 danh mục được mua nhiều nhất
+plt.figure(figsize=(8, 5))
+top_products = product_counts.most_common(10)
+sns.barplot(x=[v for _,v in top_products],
+            y=[k for k,_ in top_products], palette="Greens_d")
+plt.title('Top 10 danh mục được mua nhiều nhất', fontsize=13, pad=15)
+plt.xlabel('Số lần mua')
+plt.tight_layout()
+plt.savefig('charts/top10_categories.png', dpi=200, bbox_inches='tight')
+plt.show()
+
+print("✅ Hoàn thành Phần 3")
 
 # ================== 4. PHÂN ĐOẠN KHÁCH HÀNG & PHÂN TÍCH CHI TIÊU ==================
-print("\n" + "=" * 80)
+print("\n" + "=" * 70)
 print("4. PHÂN ĐOẠN KHÁCH HÀNG VÀ PHÂN TÍCH CHI TIÊU")
-print("=" * 80)
+print("=" * 70)
 
-segmentation_features = ['Age', 'Purchase_Amount', 'Frequency_of_Purchase',
-                         'Customer_Satisfaction', 'Brand_Loyalty']
+from sklearn.preprocessing import StandardScaler
+from sklearn.cluster import KMeans
 
-X_segment = df_clean[segmentation_features].copy()
-scaler = StandardScaler()
-X_segment_scaled = scaler.fit_transform(X_segment)
+# Phân cụm khách hàng
+features = ['Age', 'Purchase_Amount', 'Frequency_of_Purchase',
+            'Customer_Satisfaction', 'Brand_Loyalty']
 
-n_clusters = 4
-kmeans = KMeans(n_clusters=n_clusters, random_state=42, n_init=10)
-df_clean['Customer_Segment'] = kmeans.fit_predict(X_segment_scaled)
+X = StandardScaler().fit_transform(df_clean[features])
+df_clean['Customer_Segment'] = KMeans(n_clusters=4, random_state=42, n_init=10).fit_predict(X)
 
-print(f"\nKết quả phân đoạn khách hàng ({n_clusters} nhóm):")
-for segment in range(n_clusters):
-    segment_data = df_clean[df_clean['Customer_Segment'] == segment]
-    print(f"\n  Nhóm {segment} ({len(segment_data)} giao dịch):")
-    print(f"    - Tuổi trung bình          : {segment_data['Age'].mean():.1f} tuổi")
-    print(f"    - Chi tiêu trung bình      : ${segment_data['Purchase_Amount'].mean():.2f}")
-    print(f"    - Tần suất mua trung bình  : {segment_data['Frequency_of_Purchase'].mean():.1f}")
-    print(f"    - Điểm hài lòng            : {segment_data['Customer_Satisfaction'].mean():.2f}/10")
-    print(f"    - Độ trung thành thương hiệu: {segment_data['Brand_Loyalty'].mean():.2f}")
+# In tóm tắt nhóm
+print(f"\nKết quả phân đoạn 4 nhóm khách hàng:")
+for i in range(4):
+    seg = df_clean[df_clean['Customer_Segment'] == i]
+    print(f"  Nhóm {i}: {len(seg)} giao dịch | Chi tiêu TB: ${seg['Purchase_Amount'].mean():.2f} | "
+          f"Hài lòng: {seg['Customer_Satisfaction'].mean():.2f}")
 
-# Phân tích chi tiêu theo mức thu nhập
-print(f"\nPhân tích chi tiêu theo mức thu nhập:")
-income_spending = df_clean.groupby('Income_Level').agg({
-    'Purchase_Amount': ['mean', 'median', 'sum', 'count']
-}).round(2)
-income_spending.columns = ['Trung bình', 'Trung vị', 'Tổng', 'Số lượng']
-print(income_spending.sort_values('Trung bình', ascending=False))
-
-# Phân tích theo giới tính
-print(f"\nPhân tích chi tiêu theo giới tính:")
-gender_spending = df_clean.groupby('Gender').agg({
-    'Purchase_Amount': ['mean', 'median', 'sum', 'count'],
+# Biểu đồ 3: Chi tiêu & Hài lòng theo nhóm
+seg_summary = df_clean.groupby('Customer_Segment').agg({
+    'Purchase_Amount': 'mean',
     'Customer_Satisfaction': 'mean'
 }).round(2)
-gender_spending.columns = ['Chi tiêu TB', 'Trung vị', 'Tổng chi', 'Số lượng', 'Hài lòng TB']
-print(gender_spending)
+seg_summary['Hài lòng x40'] = seg_summary['Customer_Satisfaction'] * 40
+
+plt.figure(figsize=(8, 5))
+x = range(4)
+width = 0.35
+
+plt.bar(x, seg_summary['Purchase_Amount'], width, label='Chi tiêu TB ($)', color='#8A7CFF')
+plt.bar([i + width for i in x], seg_summary['Hài lòng x40'], width, label='Hài lòng ×40', color='#4ECDC4')
+
+plt.title('Chi tiêu và Hài lòng theo Nhóm khách hàng', fontsize=13, pad=15)
+plt.xticks([i + width/2 for i in x],
+           ['Nhóm 0 — Ổn định', 'Nhóm 1 — Trẻ', 'Nhóm 2 — Rủi ro', 'Nhóm 3 — Trung thành'])
+plt.ylabel('$')
+plt.legend(fontsize=10)
+plt.grid(axis='y', alpha=0.3)
+plt.tight_layout()
+plt.savefig('charts/segment_spending_satisfaction.png', dpi=200, bbox_inches='tight')
+plt.show()
+
+# Biểu đồ 4: Chi tiêu theo mức thu nhập
+plt.figure(figsize=(8, 5))
+income_avg = df_clean.groupby('Income_Level')['Purchase_Amount'].mean()
+sns.barplot(x=income_avg.index, y=income_avg.values, palette=['#8A7CFF', '#4ECDC4'])
+plt.title('Chi tiêu theo mức thu nhập', fontsize=13)
+plt.ylabel('Chi tiêu trung bình ($)')
+plt.ylim(270, 278)
+plt.tight_layout()
+plt.savefig('charts/spending_by_income.png', dpi=200, bbox_inches='tight')
+plt.show()
+
+# Biểu đồ 5: Chi tiêu theo giới tính
+plt.figure(figsize=(8, 5))
+gender_avg = df_clean.groupby('Gender')['Purchase_Amount'].mean()
+sns.barplot(x=gender_avg.index, y=gender_avg.values, palette="Purples_d")
+plt.title('Chi tiêu trung bình theo giới tính', fontsize=13)
+plt.ylabel('Chi tiêu trung bình ($)')
+plt.xticks(rotation=45)
+plt.tight_layout()
+plt.savefig('charts/spending_by_gender.png', dpi=200, bbox_inches='tight')
+plt.show()
+
+print("✅ Hoàn thành Phần 4")
 
 # ================== 5. TRỰC QUAN HÓA DỮ LIỆU ==================
 
@@ -431,9 +477,13 @@ print("✓ Đã lưu kết quả dự đoán: 'model_predictions.csv'")
 print("\n" + "=" * 80)
 print("HOÀN THÀNH PHÂN TÍCH HÀNH VI NGƯỜI TIÊU DÙNG")
 print("=" * 80)
+
+# Lấy số nhóm an toàn (phòng trường hợp chưa chạy phần 4)
+num_clusters = df_clean['Customer_Segment'].nunique() if 'Customer_Segment' in df_clean.columns else 4
+
 print(f"\nTóm tắt kết quả:")
 print(f"  • Số giao dịch đã phân tích : {len(df_clean):,}")
 print(f"  • Số danh mục sản phẩm     : {df_clean['Purchase_Category'].nunique()}")
-print(f"  • Số nhóm khách hàng        : {n_clusters}")
-print(f"  • Độ chính xác mô hình (R²) : {test_r2:.2%} trên tập kiểm tra")
+print(f"  • Số nhóm khách hàng        : {num_clusters}")
+print(f"  • Độ chính xác mô hình (R²) : {test_r2:.2%}" if 'test_r2' in locals() else "  • Độ chính xác mô hình (R²) : Chưa chạy mô hình")
 print("=" * 80)
